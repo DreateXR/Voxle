@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain, screen } from "electron";
 import path from "path";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -8,9 +8,11 @@ if (require("electron-squirrel-startup")) {
 
 const createWindow = () => {
   // Create the browser window.
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+  // console.log((width * 2) / 3, (height * 9) / 10);
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: Math.floor((width * 2) / 3),
+    height: Math.floor((height * 9) / 10),
     webPreferences: {
       webSecurity: false,
       contextIsolation: true,
@@ -33,6 +35,30 @@ const createWindow = () => {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
+  ipcMain.handle("init-file-info", () => {
+    let data = null;
+
+    // For Windows
+    if (process.platform == "win32" && process.argv.length >= 2) {
+      let openFilePath = process.argv[1];
+      data = openFilePath;
+    }
+
+    // For macOS and Linux
+    else if (
+      (process.platform === "darwin" || process.platform === "linux") &&
+      process.argv.length >= 2
+    ) {
+      let openFilePath = process.argv[1];
+      // Check if the file path is not an Electron flag (e.g., --no-sandbox)
+      if (!openFilePath.startsWith("--")) {
+        data = openFilePath;
+      }
+    }
+
+    return data;
+  });
 };
 
 // This method will be called when Electron has finished

@@ -16,9 +16,10 @@ const Viewport: React.FC<{}> = () => {
     <Canvas
       className="w-full h-full bg-viewport-base-color rounded"
       gl={{ powerPreference: "high-performance" }}
+      dpr={1}
       camera={{ position: [3, 1, 0] }}
     >
-      {/* <Loader /> */}
+      <Loader />
       <Lights />
       <Camera />
       <OrbitControls />

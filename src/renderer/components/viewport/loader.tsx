@@ -19,6 +19,7 @@ const Loader: React.FC<{}> = () => {
         loader(fileInfo, scene);
       } catch {
         // Error
+        console.log("Error on loader");
       }
     };
     initLoader();

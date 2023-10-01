@@ -24,5 +24,5 @@
       "@views/*": ["src/renderer/views/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "*.ts"]
 }
