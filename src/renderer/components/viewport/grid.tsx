@@ -18,22 +18,22 @@ const GridWrapper: React.FC<{}> = () => {
   // };
   const { camera, scene } = useThree();
 
-  // useEffect(() => {
-  //   console.log(scene.children);
-  // }, [scene.children]);
+  useEffect(() => {
+    console.log(scene.children);
+  }, [scene.children]);
 
   useFrame(() => {
     let cameraPosition = Math.abs(camera.position.y);
     // console.log(cameraPosition);
     if (cameraPosition <= 4) {
       setCellSize(2);
-      setFadeStrength(2);
+      setFadeStrength(1);
     } else if (cameraPosition <= 8) {
       setCellSize(4);
       setFadeStrength(2);
     } else if (cameraPosition <= 16) {
       setCellSize(8);
-      setFadeStrength(2);
+      setFadeStrength(4);
     } else if (cameraPosition <= 32) {
       setCellSize(16);
       setFadeStrength(2);

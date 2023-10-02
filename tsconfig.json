@@ -21,6 +21,7 @@
       "@components/*": ["src/renderer/components/*"],
       "@lib/*": ["src/renderer/lib/*"],
       "@styles/*": ["src/renderer/styles/*"],
+      "@store/*": ["src/renderer/store/*"],
       "@views/*": ["src/renderer/views/*"]
     }
   },

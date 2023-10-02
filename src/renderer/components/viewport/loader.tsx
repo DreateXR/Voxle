@@ -4,27 +4,28 @@ import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { useThree } from "@react-three/fiber";
 import loader from "@lib/loaders/loaders";
-import { dropEventListener } from "@lib/drop-file";
+import { enableFileDropEventListener } from "@lib/drop-file";
+import { initFileLoader } from "@lib/init-file";
+import { useGlobalStore } from "@/renderer/store/store";
 
 const Loader: React.FC<{}> = () => {
+  const { pendingFileList, setAssetLoadingInProgress, setPendingFileList } =
+    useGlobalStore();
   const { scene } = useThree();
   useEffect(() => {
-    const initLoader = async () => {
-      const initFilePath = await window.electronAPI.getInitFile();
-      try {
-        const fileInfo = {
-          name: initFilePath.replace(/^.*[\\\/]/, ""),
-          path: initFilePath,
-        };
-        loader(fileInfo, scene);
-      } catch {
-        // Error
-        console.log("Error on loader");
-      }
-    };
-    initLoader();
-    dropEventListener(scene, loader);
+    initFileLoader();
+    enableFileDropEventListener();
   }, []);
+  useEffect(() => {
+    console.log(pendingFileList);
+    if (pendingFileList) {
+      setAssetLoadingInProgress(true);
+      loader(pendingFileList, scene, () => {
+        setPendingFileList(null);
+        setAssetLoadingInProgress(false);
+      });
+    }
+  }, [pendingFileList]);
   return null;
 };
 

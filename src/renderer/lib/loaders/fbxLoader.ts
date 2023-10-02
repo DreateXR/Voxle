@@ -1,6 +1,6 @@
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 
-const fbxLoader = (fileInfo: any, scene: any) => {
+const fbxLoader = (fileInfo: any, scene: any, cleanup: () => void) => {
   const fileName = fileInfo.name;
   const filePath = fileInfo.path;
   const loader = new FBXLoader();
@@ -11,10 +11,12 @@ const fbxLoader = (fileInfo: any, scene: any) => {
     filePath,
     (fbx) => {
       scene.add(fbx);
+      cleanup();
     },
     undefined,
     (error) => {
       console.log(error);
+      cleanup();
     }
   );
 };

@@ -1,4 +1,8 @@
-const dropEventListener = (scene: any, loader: any) => {
+import loader from "@lib/loaders/loaders";
+
+import { useGlobalStore } from "@store/store";
+
+const enableFileDropEventListener = () => {
   const dropZone = document.getElementById("voxle");
   dropZone.addEventListener("dragover", (event) => {
     event.preventDefault();
@@ -14,10 +18,11 @@ const dropEventListener = (scene: any, loader: any) => {
 
     if (files.length > 0) {
       const fileInfo = files[0];
-      console.log("Dropped file:", fileInfo);
-      loader(fileInfo, scene);
+      // console.log("Dropped file:", fileInfo);
+      useGlobalStore.setState({ pendingFileList: fileInfo });
+      // loader(fileInfo, scene);
     }
   });
 };
 
-export { dropEventListener };
+export { enableFileDropEventListener };
