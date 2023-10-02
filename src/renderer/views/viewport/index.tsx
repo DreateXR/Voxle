@@ -4,12 +4,15 @@ import {
   Lights,
   Loader,
   OrbitControls,
-} from "@/renderer/components/viewport";
+} from "@components/viewport";
 import { Canvas } from "@react-three/fiber";
 import React, { useEffect, useState } from "react";
 
 import { Stats } from "@react-three/drei";
-import { Stats as Stats1 } from "@/renderer/components/viewport";
+import { Stats as Stats1 } from "@components/viewport";
+import ObjectSelector from "@components/viewport/object-selector";
+import { EffectComposer } from "@react-three/postprocessing";
+import { Outline } from "@react-three/postprocessing";
 
 const Viewport: React.FC<{}> = () => {
   return (
@@ -17,7 +20,6 @@ const Viewport: React.FC<{}> = () => {
       className="w-full h-full bg-viewport-base-color rounded"
       gl={{ powerPreference: "high-performance" }}
       dpr={1}
-      camera={{ position: [3, 1, 0] }}
     >
       <Loader />
       <Lights />
@@ -26,6 +28,10 @@ const Viewport: React.FC<{}> = () => {
       <Stats />
       <Stats1 />
       <Grid />
+      <ObjectSelector />
+      <EffectComposer>
+        <Outline visibleEdgeColor={10} edgeStrength={100} />
+      </EffectComposer>
     </Canvas>
   );
 };

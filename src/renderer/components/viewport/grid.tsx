@@ -24,7 +24,7 @@ const GridWrapper: React.FC<{}> = () => {
 
   useFrame(() => {
     let cameraPosition = Math.abs(camera.position.y);
-    // console.log(cameraPosition);
+    // console.log(camera);
     if (cameraPosition <= 4) {
       setCellSize(2);
       setFadeStrength(1);
@@ -63,6 +63,7 @@ const GridWrapper: React.FC<{}> = () => {
         fadeStrength={fadeStrength}
         followCamera
         side={DoubleSide}
+        raycast={() => {}}
       />
     </>
   );

@@ -11,7 +11,7 @@ const createWindow = () => {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
   // console.log((width * 2) / 3, (height * 9) / 10);
   const mainWindow = new BrowserWindow({
-    width: Math.floor((width * 2) / 3),
+    width: Math.floor((width * 7) / 8),
     height: Math.floor((height * 9) / 10),
     webPreferences: {
       webSecurity: false,
