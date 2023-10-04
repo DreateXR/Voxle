@@ -3,6 +3,7 @@ import Loader from "@components/viewport/loader";
 import Camera from "@components/viewport/camera";
 import Lights from "@components/viewport/lights";
 import Stats from "@components/viewport/stats";
-import OrbitControls from "@components/viewport/orbit-controls";
+import Controllers from "@components/viewport/controllers";
+import Gizmo from "@components/viewport/gizmo";
 
-export { Grid, Loader, Camera, Lights, Stats, OrbitControls };
+export { Grid, Loader, Camera, Lights, Stats, Gizmo, Controllers };
