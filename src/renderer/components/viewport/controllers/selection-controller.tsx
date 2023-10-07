@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 const SelectionController: React.FC<{}> = () => {
   const { scene, camera, raycaster, pointer } = useThree();
-  const { setSelectedObject } = useGlobalStore();
+  const { setSelectedObject, selectionMode } = useGlobalStore();
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [isMouseMove, setIsMouseMove] = useState(false);
 
@@ -40,7 +40,11 @@ const SelectionController: React.FC<{}> = () => {
       while (parentGroup && parentGroup.type !== "Scene") {
         if (parentGroup.type === "Group" || parentGroup.type === "Mesh") {
           console.log("Intersected Group:", parentGroup);
-          setSelectedObject(parentGroup);
+          if (selectionMode == "object") {
+            setSelectedObject(parentGroup.parent);
+          } else if (selectionMode == "mesh") {
+            setSelectedObject(parentGroup);
+          }
           break;
         }
         parentGroup = parentGroup.parent;
@@ -51,32 +55,34 @@ const SelectionController: React.FC<{}> = () => {
   };
 
   const handleMouseDown = () => {
+    // console.log("mouse down");
     setIsMouseDown(true);
   };
 
   const handleMouseMove = () => {
+    // console.log("mouse move");
     if (isMouseDown) {
       setIsMouseMove(true);
     }
   };
 
   const handleMouseUp = () => {
+    // console.log("mouse up");
     raycastObjectSelection();
     setIsMouseMove(false);
     setIsMouseDown(false);
   };
 
   useEffect(() => {
-    const canvas = document.querySelector("canvas");
-
-    canvas.addEventListener("mousedown", handleMouseDown);
-    canvas.addEventListener("mousemove", handleMouseMove);
-    canvas.addEventListener("mouseup", handleMouseUp);
+    const viewport = document.getElementById("viewport");
+    viewport.addEventListener("mousedown", handleMouseDown);
+    viewport.addEventListener("mousemove", handleMouseMove);
+    viewport.addEventListener("mouseup", handleMouseUp);
 
     return () => {
-      canvas.removeEventListener("mousedown", handleMouseDown);
-      canvas.removeEventListener("mousemove", handleMouseMove);
-      canvas.removeEventListener("mouseup", handleMouseUp);
+      viewport.removeEventListener("mousedown", handleMouseDown);
+      viewport.removeEventListener("mousemove", handleMouseMove);
+      viewport.removeEventListener("mouseup", handleMouseUp);
     };
   }, [camera, isMouseDown, isMouseMove]);
   return null;

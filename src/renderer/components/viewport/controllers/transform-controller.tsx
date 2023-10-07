@@ -65,10 +65,6 @@ const TransformController = () => {
       ref={ref}
       raycast={() => {}}
       mode={transformControls.mode}
-      onMouseDown={() => {}}
-      onMouseUp={() => {}}
-      onChange={() => {}}
-      onClick={() => {}}
     />
   );
 };

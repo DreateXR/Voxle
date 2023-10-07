@@ -6,12 +6,12 @@ import LoadingAnimation from "./components/loading-animation";
 
 const App: React.FC<{}> = () => {
   return (
-    <div
-      id="voxle"
-      className="w-screen h-screen flex justify-center items-center bg-app-border-color text-app-white p-1 rounded overflow-hidden"
-    >
+    <div className="w-screen h-screen flex justify-center items-center bg-app-border-color text-app-white p-1 rounded overflow-hidden">
       <LoadingAnimation />
-      <Viewport />
+      <div className="w-full h-full flex">
+        <Viewport className=" relative grow h-full" />
+        <div className="w-[350px]  h-full"></div>
+      </div>
     </div>
   );
 };

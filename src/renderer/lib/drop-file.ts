@@ -3,7 +3,7 @@ import loader from "@lib/loaders/loaders";
 import { useGlobalStore } from "@store/store";
 
 const enableFileDropEventListener = () => {
-  const dropZone = document.getElementById("voxle");
+  const dropZone = document.getElementById("viewport");
   dropZone.addEventListener("dragover", (event) => {
     event.preventDefault();
     event.stopPropagation();
