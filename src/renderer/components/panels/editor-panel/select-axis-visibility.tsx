@@ -2,27 +2,27 @@ import { useGlobalStore } from "@/renderer/store/store";
 import { APP_COLOR_SCHEME } from "@config/color-scheme";
 import React from "react";
 
-const SelectGridVisibility: React.FC<{}> = () => {
-  const { gridVisibility, setGridVisibility } = useGlobalStore();
+const SelectAxisVisibility: React.FC<{}> = () => {
+  const { axisVisibility, setAxisVisibility } = useGlobalStore();
   return (
     <svg
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
       className="h-8 aspect-square bg-app-border-color rounded p-1.5 cursor-pointer bg-opacity-60 hover:bg-opacity-100"
       onClick={() => {
-        setGridVisibility(!gridVisibility);
+        setAxisVisibility(!axisVisibility);
       }}
     >
       <path
         fill={
-          gridVisibility
+          axisVisibility
             ? APP_COLOR_SCHEME["app-white"]
             : APP_COLOR_SCHEME["app-white-disable"]
         }
-        d="M10,4V8H14V4H10M16,4V8H20V4H16M16,10V14H20V10H16M16,16V20H20V16H16M14,20V16H10V20H14M8,20V16H4V20H8M8,14V10H4V14H8M8,8V4H4V8H8M10,14H14V10H10V14M4,2H20A2,2 0 0,1 22,4V20A2,2 0 0,1 20,22H4C2.92,22 2,21.1 2,20V4A2,2 0 0,1 4,2Z"
+        d="M12,2L16,6H13V13.85L19.53,17.61L21,15.03L22.5,20.5L17,21.96L18.53,19.35L12,15.58L5.47,19.35L7,21.96L1.5,20.5L3,15.03L4.47,17.61L11,13.85V6H8L12,2Z"
       />
     </svg>
   );
 };
 
-export default SelectGridVisibility;
+export default SelectAxisVisibility;

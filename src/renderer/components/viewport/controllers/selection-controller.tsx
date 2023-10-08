@@ -74,6 +74,10 @@ const SelectionController: React.FC<{}> = () => {
   };
 
   useEffect(() => {
+    setSelectedObject(null);
+  }, []);
+
+  useEffect(() => {
     const viewport = document.getElementById("viewport");
     viewport.addEventListener("mousedown", handleMouseDown);
     viewport.addEventListener("mousemove", handleMouseMove);

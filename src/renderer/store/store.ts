@@ -7,6 +7,7 @@ type GlobalStore = {
   selectionMode: "object" | "mesh";
   transformControls: { mode: "translate" | "scale" | "rotate" };
   gridVisibility: boolean;
+  axisVisibility: boolean;
   setAssetLoadingInProgress: (assetLoadingInProgress: boolean) => void;
   setPendingFileList: (pendingFileList: any) => void;
   setSelectedObject: (selectedObject: any) => void;
@@ -15,6 +16,7 @@ type GlobalStore = {
     mode: "translate" | "scale" | "rotate";
   }) => void;
   setGridVisibility: (gridVisibilty: boolean) => void;
+  setAxisVisibility: (axesVisibility: boolean) => void;
 };
 
 export const useGlobalStore = create<GlobalStore>((set) => ({
@@ -24,6 +26,7 @@ export const useGlobalStore = create<GlobalStore>((set) => ({
   selectionMode: "object",
   gridVisibility: true,
   transformControls: { mode: "translate" },
+  axisVisibility: true,
   setAssetLoadingInProgress: (assetLoadingInProgress) =>
     set({ assetLoadingInProgress }),
   setPendingFileList: (pendingFileList) => set({ pendingFileList }),
@@ -33,4 +36,5 @@ export const useGlobalStore = create<GlobalStore>((set) => ({
     mode: "translate" | "scale" | "rotate";
   }) => set({ transformControls }),
   setGridVisibility: (gridVisibility) => set({ gridVisibility }),
+  setAxisVisibility: (axisVisibility) => set({ axisVisibility }),
 }));
