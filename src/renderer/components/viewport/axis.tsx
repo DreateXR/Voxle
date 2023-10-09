@@ -1,3 +1,4 @@
+import { setIgnoreRaycastFlag } from "@/renderer/lib/raycast";
 import { useGlobalStore } from "@/renderer/store/store";
 import { TransformControls } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
@@ -38,7 +39,7 @@ const Axis: React.FC<{}> = () => {
   });
 
   useEffect(() => {
-    // console.log(ref.current.children[0]);
+    console.log(ref.current.children);
     ref.current.traverse((child: any) => {
       if (child.material) {
         child.renderOrder = 999;
@@ -47,6 +48,7 @@ const Axis: React.FC<{}> = () => {
         // console.log(child.material);
       }
     });
+    setIgnoreRaycastFlag(ref);
   }, [ref, xRef, yRef, zRef]);
 
   return (

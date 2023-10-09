@@ -1,3 +1,4 @@
+import { filterRaycastArray } from "@/renderer/lib/raycast";
 import { useGlobalStore } from "@/renderer/store/store";
 import { useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
@@ -7,12 +8,6 @@ const SelectionController: React.FC<{}> = () => {
   const { setSelectedObject, selectionMode } = useGlobalStore();
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [isMouseMove, setIsMouseMove] = useState(false);
-
-  const filterIntersects = (intersects: any) => {
-    return intersects.filter(
-      (item: any) => !item.object.isTransformControlsPlane
-    );
-  };
 
   const raycastObjectSelection = () => {
     // console.log("selection mouse down", isMouseDown, isMouseMove);
@@ -31,7 +26,9 @@ const SelectionController: React.FC<{}> = () => {
     });
 
     let intersects = raycaster.intersectObjects(meshes);
-    intersects = filterIntersects(intersects);
+    // console.log(intersects);
+    intersects = filterRaycastArray(intersects);
+    console.log("final raycast", intersects);
     if (intersects.length > 0) {
       const intersectedObject = intersects[0].object;
       let parentGroup = intersectedObject.parent;
@@ -50,6 +47,7 @@ const SelectionController: React.FC<{}> = () => {
         parentGroup = parentGroup.parent;
       }
     } else {
+      // console.log("clicked");
       setSelectedObject(null);
     }
   };

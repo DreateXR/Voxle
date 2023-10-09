@@ -5,7 +5,10 @@ type GlobalStore = {
   pendingFileList: any;
   selectedObject: any;
   selectionMode: "object" | "mesh";
-  transformControls: { mode: "translate" | "scale" | "rotate" };
+  transformControls: {
+    mode: "translate" | "scale" | "rotate";
+    space: "world" | "local";
+  };
   gridVisibility: boolean;
   axisVisibility: boolean;
   setAssetLoadingInProgress: (assetLoadingInProgress: boolean) => void;
@@ -14,6 +17,7 @@ type GlobalStore = {
   setSelectionMode: (selectionMode: "object" | "mesh") => void;
   setTransformControls: (transformControls: {
     mode: "translate" | "scale" | "rotate";
+    space: "world" | "local";
   }) => void;
   setGridVisibility: (gridVisibilty: boolean) => void;
   setAxisVisibility: (axesVisibility: boolean) => void;
@@ -25,7 +29,7 @@ export const useGlobalStore = create<GlobalStore>((set) => ({
   selectedObject: null,
   selectionMode: "object",
   gridVisibility: true,
-  transformControls: { mode: "translate" },
+  transformControls: { mode: "translate", space: "world" },
   axisVisibility: true,
   setAssetLoadingInProgress: (assetLoadingInProgress) =>
     set({ assetLoadingInProgress }),
@@ -34,6 +38,7 @@ export const useGlobalStore = create<GlobalStore>((set) => ({
   setSelectionMode: (selectionMode) => set({ selectionMode }),
   setTransformControls: (transformControls: {
     mode: "translate" | "scale" | "rotate";
+    space: "world" | "local";
   }) => set({ transformControls }),
   setGridVisibility: (gridVisibility) => set({ gridVisibility }),
   setAxisVisibility: (axisVisibility) => set({ axisVisibility }),

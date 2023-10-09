@@ -9,6 +9,34 @@ const readline = require("readline").createInterface({
   output: process.stdout,
 });
 
+const cleanGitDiff = (diff) => {
+  // Split the diff by lines
+  const lines = diff.split("\n");
+
+  let currentFile = null;
+  const result = {};
+
+  for (let line of lines) {
+    // Check if the line starts with 'diff --git' to get the filename
+    if (line.startsWith("diff --git")) {
+      currentFile = line.split(" ")[2].substring(2); // Extract the filename
+      result[currentFile] = [];
+    } else if (
+      currentFile &&
+      (line.startsWith("+") || line.startsWith("-")) &&
+      !line.startsWith("+++ ") &&
+      !line.startsWith("--- ")
+    ) {
+      // Check if the line starts with '+' or '-' to get the changes, but exclude the lines that start with '+++ ' or '--- '
+      result[currentFile].push(line);
+    }
+  }
+
+  return Object.entries(result)
+    .map(([key, valueArray]) => key + " " + valueArray.join(" "))
+    .join("\n");
+};
+
 const rootDirectory = process.cwd();
 
 (async () => {
@@ -27,7 +55,12 @@ const rootDirectory = process.cwd();
   const excludeCmd = excludeList.map((item) => `:(exclude)` + item + ``);
   const diff = run(`git diff --staged -- . ${excludeCmd.join(" ")}`);
 
-  const message = await generateCommitMessage(config, diff);
+  const cleanDiff = cleanGitDiff(diff);
+  console.log(cleanDiff);
+
+  return;
+
+  const message = await generateCommitMessage(config, cleanDiff);
   console.log(message, "\n");
 
   readline.question(

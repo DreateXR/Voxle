@@ -24,22 +24,24 @@ import EditorPanel from "@/renderer/components/panels/editor-panel";
 
 const Viewport: React.FC<{ className: string }> = ({ className }) => {
   return (
-    <main id="viewport" className={className}>
+    <main className={className}>
       <EditorPanel />
-      <Canvas
-        className="w-full h-full bg-viewport-base-color rounded"
-        gl={{ antialias: true, powerPreference: "high-performance" }}
-        dpr={[1, 2]}
-      >
-        <Loader />
-        <Lights />
-        <Camera />
-        <Stats />
-        <Grid />
-        <Controllers />
-        <Gizmo />
-        <Axis />
-      </Canvas>
+      <div id="viewport" className="w-full h-full rounded overflow-hidden">
+        <Canvas
+          className="w-full h-full bg-viewport-base-color"
+          gl={{ antialias: true, powerPreference: "high-performance" }}
+          dpr={[1, 2]}
+        >
+          <Loader />
+          <Lights />
+          <Camera />
+          <Stats />
+          <Grid />
+          <Controllers />
+          <Gizmo />
+          <Axis />
+        </Canvas>
+      </div>
     </main>
   );
 };

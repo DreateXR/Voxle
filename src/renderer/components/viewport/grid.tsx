@@ -12,11 +12,10 @@ const GridWrapper: React.FC<{}> = () => {
   const { gridVisibility } = useGlobalStore();
   const { camera, scene, raycaster } = useThree();
   const ref = useRef<any>();
-  const maxCellSize = 64;
+  const cellSize = [1, 2, 4, 8, 16, 32, 64];
+  const distanceThresh = [4, 8, 16, 32, 64, 128];
   const minFadeDistance = 64;
   const maxFadeDistance = 2048;
-  const minDistanceThresh = 8;
-  const maxDistanceThresh = 128;
   const fadeStrength = 2;
   const maxSize = 6400;
 
@@ -68,30 +67,28 @@ const GridWrapper: React.FC<{}> = () => {
 
     if (!ref.current) return;
 
+    // console.log(distance);
     const mappedValue = map(
       distance,
-      minDistanceThresh,
-      maxDistanceThresh,
+      distanceThresh[0],
+      distanceThresh[5],
       minFadeDistance,
       maxFadeDistance
     );
-    if (distance <= maxDistanceThresh / 32) {
-      setUniforms(
-        maxCellSize / 32,
-        maxCellSize / 16,
-        minFadeDistance,
-        fadeStrength
-      );
-    } else if (distance <= maxDistanceThresh / 16) {
-      setUniforms(maxCellSize / 16, maxCellSize / 8, mappedValue, fadeStrength);
-    } else if (distance <= maxDistanceThresh / 8) {
-      setUniforms(maxCellSize / 8, maxCellSize / 4, mappedValue, fadeStrength);
-    } else if (distance <= maxDistanceThresh / 2) {
-      setUniforms(maxCellSize / 4, maxCellSize / 2, mappedValue, fadeStrength);
-    } else if (distance <= maxDistanceThresh) {
-      setUniforms(maxCellSize / 2, maxCellSize, mappedValue, fadeStrength);
+    if (distance <= distanceThresh[0]) {
+      setUniforms(cellSize[0], cellSize[0] * 2, minFadeDistance, fadeStrength);
+    } else if (distance <= distanceThresh[1]) {
+      setUniforms(cellSize[1], cellSize[1] * 2, mappedValue, fadeStrength);
+    } else if (distance <= distanceThresh[2]) {
+      setUniforms(cellSize[2], cellSize[2] * 2, mappedValue, fadeStrength);
+    } else if (distance <= distanceThresh[3]) {
+      setUniforms(cellSize[3], cellSize[3] * 2, mappedValue, fadeStrength);
+    } else if (distance <= distanceThresh[4]) {
+      setUniforms(cellSize[4], cellSize[4] * 2, mappedValue, fadeStrength);
+    } else if (distance <= distanceThresh[5]) {
+      setUniforms(cellSize[5], cellSize[5] * 2, mappedValue, fadeStrength);
     } else {
-      setUniforms(maxCellSize, maxCellSize * 2, maxFadeDistance, fadeStrength);
+      setUniforms(cellSize[6], cellSize[6] * 2, maxFadeDistance, fadeStrength);
     }
   });
   return (
@@ -102,15 +99,16 @@ const GridWrapper: React.FC<{}> = () => {
       sectionColor={
         APP_COLOR_SCHEME["viewport-grid-color"] as ColorRepresentation
       }
-      cellSize={maxCellSize}
+      cellSize={cellSize[6]}
       cellThickness={0.5}
       fadeDistance={maxFadeDistance}
-      sectionSize={maxCellSize * 2}
+      sectionSize={cellSize[6] * 2}
       sectionThickness={1}
       fadeStrength={fadeStrength}
       followCamera
       side={DoubleSide}
       raycast={() => {}}
+      name="voxle_ignore_raycast"
       visible={gridVisibility}
     />
   );

@@ -1,13 +1,13 @@
 import React from "react";
 import { APP_COLOR_SCHEME } from "@config/color-scheme";
 
-const Upload: React.FC<{ onClick: () => void }> = ({ onClick }) => {
+const Upload: React.FC<{}> = () => {
   return (
     <svg
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      className="h-8 aspect-square bg-app-border-color rounded p-1 cursor-pointer bg-opacity-60 hover:bg-opacity-100"
-      onClick={onClick}
+      className="h-8 aspect-square bg-app-primary-color rounded p-1 cursor-pointer bg-opacity-75 hover:bg-opacity-100 hover:bg-app-hover-color"
+      onClick={() => {}}
     >
       <path
         fill={APP_COLOR_SCHEME["app-white"]}

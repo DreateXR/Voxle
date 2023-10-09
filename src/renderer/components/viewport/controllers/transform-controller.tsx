@@ -3,6 +3,7 @@ import { useGlobalStore } from "@/renderer/store/store";
 import { TransformControls } from "@react-three/drei";
 
 import * as THREE from "three";
+import { setIgnoreRaycastFlag } from "@/renderer/lib/raycast";
 
 const TransformController = () => {
   const ref: any = useRef();
@@ -17,17 +18,17 @@ const TransformController = () => {
           child.material = new THREE.LineBasicMaterial({
             color: 0xff4136,
             depthTest: false,
-          }); // Red for X
+          });
         } else if (child.name == "Y") {
           child.material = new THREE.LineBasicMaterial({
             color: 0x2ecc40,
             depthTest: false,
-          }); // Green for Y
+          });
         } else if (child.name == "Z") {
           child.material = new THREE.LineBasicMaterial({
             color: 0x0074d9,
             depthTest: false,
-          }); // Blue for Z
+          });
         }
       }
       if (child instanceof THREE.Mesh) {
@@ -49,6 +50,7 @@ const TransformController = () => {
         }
       }
     });
+    setIgnoreRaycastFlag(ref);
   }, [ref.current]);
 
   useEffect(() => {
@@ -65,6 +67,7 @@ const TransformController = () => {
       ref={ref}
       raycast={() => {}}
       mode={transformControls.mode}
+      space={transformControls.space}
     />
   );
 };
