@@ -3,7 +3,7 @@ import { APP_COLOR_SCHEME } from "@config/color-scheme";
 import { useGlobalStore } from "@/renderer/store/store";
 
 const SelectionMode: React.FC<{}> = () => {
-  const { setSelectionMode, setSelectedObject } = useGlobalStore();
+  const { setSelectionMode } = useGlobalStore();
   return (
     <div className="relative h-8 bg-app-primary-color rounded px-2 cursor-pointer bg-opacity-75 hover:bg-opacity-100 hover:bg-app-hover-color flex justify-center items-center">
       <select
@@ -11,7 +11,6 @@ const SelectionMode: React.FC<{}> = () => {
         name="selection mode"
         onChange={(event: any) => {
           setSelectionMode(event.target.value);
-          setSelectedObject(null);
         }}
       >
         <option className="bg-app-border-color" value="object">

@@ -56,9 +56,6 @@ const rootDirectory = process.cwd();
   const diff = run(`git diff --staged -- . ${excludeCmd.join(" ")}`);
 
   const cleanDiff = cleanGitDiff(diff);
-  console.log(cleanDiff);
-
-  return;
 
   const message = await generateCommitMessage(config, cleanDiff);
   console.log(message, "\n");

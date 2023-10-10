@@ -2,10 +2,11 @@ import { filterRaycastArray } from "@/renderer/lib/raycast";
 import { useGlobalStore } from "@/renderer/store/store";
 import { useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
+import * as THREE from "three";
 
 const SelectionController: React.FC<{}> = () => {
   const { scene, camera, raycaster, pointer } = useThree();
-  const { setSelectedObject, selectionMode } = useGlobalStore();
+  const { selectedObject, setSelectedObject, selectionMode } = useGlobalStore();
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [isMouseMove, setIsMouseMove] = useState(false);
 
@@ -29,6 +30,13 @@ const SelectionController: React.FC<{}> = () => {
     // console.log(intersects);
     intersects = filterRaycastArray(intersects);
     console.log("final raycast", intersects);
+    if (selectedObject) {
+      selectedObject.traverse(function (child: any) {
+        if (child instanceof THREE.Mesh) {
+          child.layers.disable(10);
+        }
+      });
+    }
     if (intersects.length > 0) {
       const intersectedObject = intersects[0].object;
       let parentGroup = intersectedObject.parent;
@@ -39,8 +47,18 @@ const SelectionController: React.FC<{}> = () => {
           console.log("Intersected Group:", parentGroup);
           if (selectionMode == "object") {
             setSelectedObject(parentGroup.parent);
+            parentGroup.parent.traverse(function (child) {
+              if (child instanceof THREE.Mesh) {
+                child.layers.enable(10);
+              }
+            });
           } else if (selectionMode == "mesh") {
             setSelectedObject(parentGroup);
+            parentGroup.traverse(function (child) {
+              if (child instanceof THREE.Mesh) {
+                child.layers.enable(10);
+              }
+            });
           }
           break;
         }
@@ -72,8 +90,15 @@ const SelectionController: React.FC<{}> = () => {
   };
 
   useEffect(() => {
+    if (selectedObject) {
+      selectedObject.traverse(function (child: any) {
+        if (child instanceof THREE.Mesh) {
+          child.layers.disable(10);
+        }
+      });
+    }
     setSelectedObject(null);
-  }, []);
+  }, [selectionMode]);
 
   useEffect(() => {
     const viewport = document.getElementById("viewport");
