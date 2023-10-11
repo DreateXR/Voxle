@@ -55,10 +55,10 @@ const rootDirectory = process.cwd();
   const excludeCmd = excludeList.map((item) => `:(exclude)` + item + ``);
   const diff = run(`git diff --staged -- . ${excludeCmd.join(" ")}`);
 
-  const cleanDiff = cleanGitDiff(diff);
+  // const cleanDiff = cleanGitDiff(diff);
 
-  const message = await generateCommitMessage(config, cleanDiff);
-  console.log(message, "\n");
+  const message = await generateCommitMessage(config, diff);
+  console.log(`git commit -m "${message}"`);
 
   readline.question(
     "Do you want to continue with the commit and push process? ( y/N ) : ",

@@ -4,6 +4,9 @@ type GlobalStore = {
   assetLoadingInProgress: boolean;
   pendingFileList: any;
   selectedObject: any;
+  hoverObject: any;
+  selectionHighlight: boolean;
+  hoverHighlight: boolean;
   selectionMode: "object" | "mesh";
   transformControls: {
     mode: "translate" | "scale" | "rotate";
@@ -14,6 +17,9 @@ type GlobalStore = {
   setAssetLoadingInProgress: (assetLoadingInProgress: boolean) => void;
   setPendingFileList: (pendingFileList: any) => void;
   setSelectedObject: (selectedObject: any) => void;
+  setHoverObject: (hoverObject: any) => void;
+  setSelectionHighlight: (selectionHighlight: boolean) => void;
+  setHoverHighlight: (hoverHighlight: boolean) => void;
   setSelectionMode: (selectionMode: "object" | "mesh") => void;
   setTransformControls: (transformControls: {
     mode: "translate" | "scale" | "rotate";
@@ -27,6 +33,9 @@ export const useGlobalStore = create<GlobalStore>((set) => ({
   assetLoadingInProgress: false,
   pendingFileList: null,
   selectedObject: null,
+  hoverObject: null,
+  selectionHighlight: false,
+  hoverHighlight: true,
   selectionMode: "object",
   gridVisibility: true,
   transformControls: { mode: "translate", space: "world" },
@@ -35,6 +44,9 @@ export const useGlobalStore = create<GlobalStore>((set) => ({
     set({ assetLoadingInProgress }),
   setPendingFileList: (pendingFileList) => set({ pendingFileList }),
   setSelectedObject: (selectedObject) => set({ selectedObject }),
+  setHoverObject: (hoverObject) => set({ hoverObject }),
+  setSelectionHighlight: (selectionHighlight) => set({ selectionHighlight }),
+  setHoverHighlight: (hoverHighlight) => set({ hoverHighlight }),
   setSelectionMode: (selectionMode) => set({ selectionMode }),
   setTransformControls: (transformControls: {
     mode: "translate" | "scale" | "rotate";

@@ -49,7 +49,7 @@ const Axis: React.FC<{}> = () => {
       }
     });
     setIgnoreRaycastFlag(ref);
-  }, [ref, xRef, yRef, zRef]);
+  }, [ref, ref.current, xRef, yRef, zRef]);
 
   return (
     <mesh ref={ref} position={[0, 0, 0]} visible={axisVisibility}>

@@ -51,7 +51,7 @@ const TransformController = () => {
       }
     });
     setIgnoreRaycastFlag(ref);
-  }, [ref.current]);
+  }, [ref, ref.current]);
 
   useEffect(() => {
     // console.log(ref.current, selectedObject);

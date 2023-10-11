@@ -6,6 +6,8 @@ import { ColorRepresentation, DoubleSide } from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useGlobalStore } from "@/renderer/store/store";
 
+import { setIgnoreRaycastFlag } from "@/renderer/lib/raycast";
+
 import * as THREE from "three";
 
 const GridWrapper: React.FC<{}> = () => {
@@ -91,6 +93,10 @@ const GridWrapper: React.FC<{}> = () => {
       setUniforms(cellSize[6], cellSize[6] * 2, maxFadeDistance, fadeStrength);
     }
   });
+
+  useEffect(() => {
+    setIgnoreRaycastFlag(ref);
+  }, [ref, ref.current]);
   return (
     <Grid
       ref={ref}
@@ -108,7 +114,6 @@ const GridWrapper: React.FC<{}> = () => {
       followCamera
       side={DoubleSide}
       raycast={() => {}}
-      name="voxle_ignore_raycast"
       visible={gridVisibility}
     />
   );
