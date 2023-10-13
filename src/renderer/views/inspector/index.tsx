@@ -1,13 +1,12 @@
-import Outliner from "@/renderer/components/inspector/outliner";
+import TopPanel from "@/renderer/components/inspector/top-panel";
 import React from "react";
 
 const Inspector: React.FC<{ className: string }> = ({ className }) => {
   return (
     <main className={className}>
-      <div className="w-full h-1/2 bg-app-base-color p-1">
-        <Outliner />
-      </div>
-      <div className="w-full h-1/2 bg-app-base-color"></div>
+      <TopPanel />
+
+      <div className="w-full h-1/2 bg-app-base-color rounded"></div>
     </main>
   );
 };

@@ -9,11 +9,11 @@
 }
 
 .outliner:nth-child(odd) {
-  @apply bg-bg-outliner-odd-color;
+  @apply bg-outliner-odd-color;
 }
 
 .outliner:nth-child(even) {
-  @apply bg-bg-outliner-even-color;
+  @apply bg-outliner-even-color;
 }
 
 /* width */
