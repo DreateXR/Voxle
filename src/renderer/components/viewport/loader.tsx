@@ -9,8 +9,13 @@ import { initFileLoader } from "@/renderer/lib/file/init-file";
 import { useGlobalStore } from "@/renderer/store/store";
 
 const Loader: React.FC<{}> = () => {
-  const { pendingFileList, setAssetLoadingInProgress, setPendingFileList } =
-    useGlobalStore();
+  const {
+    pendingFileList,
+    setAssetLoadingInProgress,
+    setPendingFileList,
+    assetList,
+    setAssetList,
+  } = useGlobalStore();
   const { scene } = useThree();
   useEffect(() => {
     initFileLoader();
@@ -20,7 +25,10 @@ const Loader: React.FC<{}> = () => {
     console.log(pendingFileList);
     if (pendingFileList) {
       setAssetLoadingInProgress(true);
-      loader(pendingFileList, scene, () => {
+      loader(pendingFileList, scene, (model?: any) => {
+        if (model) {
+          setAssetList([...assetList, model]);
+        }
         setPendingFileList(null);
         setAssetLoadingInProgress(false);
       });

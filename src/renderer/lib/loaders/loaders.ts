@@ -2,11 +2,11 @@ import gltfLoader from "./gltfLoader";
 import fbxLoader from "./fbxLoader";
 
 const loaderList: {
-  glb: (fileInfo: any, scene: any, cleanup: () => void) => void;
-  gltf: (fileInfo: any, scene: any, cleanup: () => void) => void;
-  fbx: (fileInfo: any, scene: any, cleanup: () => void) => void;
+  glb: (fileInfo: any, scene: any, cleanup: (model?: any) => void) => void;
+  gltf: (fileInfo: any, scene: any, cleanup: (model?: any) => void) => void;
+  fbx: (fileInfo: any, scene: any, cleanup: (model?: any) => void) => void;
   [key: string]:
-    | ((fileInfo: any, scene: any, cleanup: () => void) => void)
+    | ((fileInfo: any, scene: any, cleanup: (model?: any) => void) => void)
     | undefined;
 } = {
   glb: gltfLoader,

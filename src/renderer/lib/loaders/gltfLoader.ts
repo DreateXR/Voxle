@@ -1,6 +1,10 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
-const gltfLoader = (fileInfo: any, scene: any, cleanup: () => void) => {
+const gltfLoader = (
+  fileInfo: any,
+  scene: any,
+  cleanup: (model?: any) => void
+) => {
   const fileName = fileInfo.name;
   const filePath = fileInfo.path;
   const loader = new GLTFLoader();
@@ -10,7 +14,7 @@ const gltfLoader = (fileInfo: any, scene: any, cleanup: () => void) => {
     (gltf) => {
       // console.log(gltf);
       scene.add(gltf.scene);
-      cleanup();
+      cleanup(gltf.scene);
     },
     undefined,
     (error) => {

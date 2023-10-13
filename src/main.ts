@@ -1,6 +1,9 @@
 import { app, BrowserWindow, ipcMain, screen } from "electron";
 import path from "path";
 
+// Use high-performance GPU
+app.commandLine.appendSwitch("--force_high_performance_gpu");
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
   app.quit();
@@ -34,7 +37,7 @@ const createWindow = () => {
   mainWindow.setMenuBarVisibility(false);
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   ipcMain.handle("init-file-info", () => {
     let data = null;

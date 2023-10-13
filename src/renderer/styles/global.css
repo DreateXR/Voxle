@@ -7,3 +7,33 @@
   margin: 0;
   padding: 0;
 }
+
+.outliner:nth-child(odd) {
+  @apply bg-bg-outliner-odd-color;
+}
+
+.outliner:nth-child(even) {
+  @apply bg-bg-outliner-even-color;
+}
+
+/* width */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-app-scrollbar-track-color;
+  @apply rounded-full;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-app-scrollbar-color;
+  @apply rounded-full;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-app-scrollbar-hover-color;
+}

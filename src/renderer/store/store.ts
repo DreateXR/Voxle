@@ -14,6 +14,7 @@ type GlobalStore = {
   };
   gridVisibility: boolean;
   axisVisibility: boolean;
+  assetList: any;
   setAssetLoadingInProgress: (assetLoadingInProgress: boolean) => void;
   setPendingFileList: (pendingFileList: any) => void;
   setSelectedObject: (selectedObject: any) => void;
@@ -27,6 +28,7 @@ type GlobalStore = {
   }) => void;
   setGridVisibility: (gridVisibilty: boolean) => void;
   setAxisVisibility: (axesVisibility: boolean) => void;
+  setAssetList: (assetList: any) => void;
 };
 
 export const useGlobalStore = create<GlobalStore>((set) => ({
@@ -40,6 +42,7 @@ export const useGlobalStore = create<GlobalStore>((set) => ({
   gridVisibility: true,
   transformControls: { mode: "translate", space: "world" },
   axisVisibility: true,
+  assetList: [],
   setAssetLoadingInProgress: (assetLoadingInProgress) =>
     set({ assetLoadingInProgress }),
   setPendingFileList: (pendingFileList) => set({ pendingFileList }),
@@ -54,4 +57,5 @@ export const useGlobalStore = create<GlobalStore>((set) => ({
   }) => set({ transformControls }),
   setGridVisibility: (gridVisibility) => set({ gridVisibility }),
   setAxisVisibility: (axisVisibility) => set({ axisVisibility }),
+  setAssetList: (assetList) => set({ assetList }),
 }));

@@ -5,7 +5,7 @@ import { useGlobalStore } from "@/renderer/store/store";
 const SelectionMode: React.FC<{}> = () => {
   const { setSelectionMode } = useGlobalStore();
   return (
-    <div className="relative h-8 bg-app-primary-color rounded px-2 cursor-pointer bg-opacity-75 hover:bg-opacity-100 hover:bg-app-hover-color flex justify-center items-center">
+    <div className="relative h-8 bg-app-primary-color rounded px-2 cursor-pointer bg-opacity-75 hover:bg-opacity-100 hover:bg-app-hover-color flex justify-center items-center font-mono">
       <select
         className="bg-transparent cursor-pointer text-xs border-[1px] border-viewport-base-color hover:border-viewport-grid-color rounded p-0.5 outline-none"
         name="selection mode"
