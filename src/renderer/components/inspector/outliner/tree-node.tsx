@@ -12,11 +12,6 @@ const TreeNode: React.FC<{
   const WIDTH_CONSTANT = 16;
   const [isExpanded, setIsExpanded] = useState(false);
   const { setSelectedObject } = useGlobalStore();
-  useEffect(() => {
-    // if (node) {
-    //   node.visible = false;
-    // }
-  }, [node]);
   if (!node) {
     return null;
   }
@@ -25,7 +20,17 @@ const TreeNode: React.FC<{
   }
   return (
     <>
-      <div className="w-full flex py-1 pr-2 gap-2 outliner bg-[#ff0000]">
+      <div
+        className="w-full flex py-1 pr-2 gap-2 outliner h-7 items-center"
+        // onDragOver={(e: any) => {
+        //     e.preventDefault();
+        // }}
+        // onDrop={(e: any) => {
+        //   e.preventDefault();
+        //   const nodeId = JSON.parse(e.dataTransfer.getData("node"));
+        //   console.log(nodeId);
+        // }}
+      >
         <div style={{ minWidth: `${WIDTH_CONSTANT * (depth - 1)}px` }} />
         <DropDown isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
         <div
@@ -33,6 +38,10 @@ const TreeNode: React.FC<{
           onClick={() => {
             setSelectedObject(node);
           }}
+          //   draggable="true"
+          //   onDragStart={(e: any) => {
+          //     e.dataTransfer.setData("node", JSON.stringify(node));
+          //   }}
         >
           {node.name ? node.name : node.type}
         </div>

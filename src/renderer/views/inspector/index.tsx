@@ -6,7 +6,7 @@ const Inspector: React.FC<{ className: string }> = ({ className }) => {
     <main className={className}>
       <TopPanel />
 
-      <div className="w-full h-1/2 bg-app-base-color rounded"></div>
+      <div className="w-full h-2/5 bg-app-base-color rounded"></div>
     </main>
   );
 };

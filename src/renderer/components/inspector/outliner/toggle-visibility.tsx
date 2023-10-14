@@ -9,7 +9,7 @@ const ToggleVisibility: React.FC<{
   const [visible, setVisible] = useState(isVisible);
   return (
     <div
-      className="relative h-full aspect-square cursor-pointer"
+      className="relative h-full aspect-square cursor-pointer p-0.5"
       onClick={() => {
         setModelVisibility(!visible);
         setVisible(!visible);

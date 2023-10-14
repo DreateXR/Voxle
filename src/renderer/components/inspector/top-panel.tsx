@@ -4,7 +4,7 @@ import Outliner from "./outliner";
 const TopPanel = () => {
   const [tab, setTab] = useState("Outliner");
   return (
-    <div className="w-full h-1/2 flex flex-col rounded">
+    <div className="w-full h-3/5 flex flex-col rounded pt-2">
       <div className="w-full flex px-2 ">
         <div
           className={`font-mono text-sm ${
