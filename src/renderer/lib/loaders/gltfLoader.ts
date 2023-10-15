@@ -1,9 +1,9 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-
+import { SUCCESS, FAILURE } from "@config/constants";
 const gltfLoader = (
   fileInfo: any,
   scene: any,
-  cleanup: (model?: any) => void
+  cleanup: (error: { code: number; message: string }, model?: any) => void
 ) => {
   const fileName = fileInfo.name;
   const filePath = fileInfo.path;
@@ -14,12 +14,14 @@ const gltfLoader = (
     (gltf) => {
       // console.log(gltf);
       scene.add(gltf.scene);
-      cleanup(gltf.scene);
+      cleanup(
+        { code: SUCCESS, message: "File loaded successfully !!" },
+        gltf.scene
+      );
     },
     undefined,
-    (error) => {
-      console.log(error);
-      cleanup();
+    (error: any) => {
+      cleanup({ code: FAILURE, message: error.message });
     }
   );
 };

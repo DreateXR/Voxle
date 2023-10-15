@@ -59,7 +59,7 @@ const HoverController: React.FC<{}> = () => {
         }
       }
     });
-    console.log(meshes);
+    // console.log(meshes);
     setRaycastObjectsList([...meshes]);
   }, [scene.children.length]);
 

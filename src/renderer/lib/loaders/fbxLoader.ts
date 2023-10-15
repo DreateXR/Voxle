@@ -1,9 +1,9 @@
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
-
+import { SUCCESS, FAILURE } from "@config/constants";
 const fbxLoader = (
   fileInfo: any,
   scene: any,
-  cleanup: (model?: any) => void
+  cleanup: (error: { code: number; message: string }, model?: any) => void
 ) => {
   const fileName = fileInfo.name;
   const filePath = fileInfo.path;
@@ -15,12 +15,12 @@ const fbxLoader = (
     filePath,
     (fbx) => {
       scene.add(fbx);
-      cleanup(fbx);
+      cleanup({ code: SUCCESS, message: "File loaded successfully !!" }, fbx);
     },
     undefined,
-    (error) => {
+    (error: any) => {
       console.log(error);
-      cleanup();
+      cleanup({ code: FAILURE, message: error.message });
     }
   );
 };

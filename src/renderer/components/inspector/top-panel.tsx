@@ -11,7 +11,7 @@ const TopPanel = () => {
             tab == "Outliner"
               ? "bg-top-panel-tab-enabled text-app-white"
               : "bg-top-panel-tab-disabled text-app-white-disable"
-          } px-2 py-1 rounded-tl-md rounded-tr-md cursor-pointer hover:text-app-white`}
+          } px-2 py-1 rounded-tl-lg rounded-tr-lg cursor-pointer hover:text-app-white`}
           onClick={() => {
             setTab("Outliner");
           }}
@@ -23,7 +23,7 @@ const TopPanel = () => {
             tab == "Details"
               ? "bg-top-panel-tab-enabled text-app-white"
               : "bg-top-panel-tab-disabled text-app-white-disable"
-          } px-2 py-1 rounded-tl-md rounded-tr-md cursor-pointer hover:text-app-white`}
+          } px-2 py-1 rounded-tl-lg rounded-tr-lg cursor-pointer hover:text-app-white`}
           onClick={() => {
             setTab("Details");
           }}

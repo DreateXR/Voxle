@@ -4,6 +4,7 @@ import { Stats } from "@react-three/drei";
 import Viewport from "@views/viewport";
 import LoadingAnimation from "./components/loading-animation";
 import Inspector from "./views/inspector";
+import { Toaster } from "react-hot-toast";
 
 const App: React.FC<{}> = () => {
   return (
@@ -13,6 +14,7 @@ const App: React.FC<{}> = () => {
         <Viewport className=" relative grow h-full" />
         <Inspector className="w-[350px] h-full rounded flex flex-col gap-1" />
       </div>
+      <Toaster position="bottom-right" reverseOrder={false} />
     </div>
   );
 };

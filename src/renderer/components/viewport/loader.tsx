@@ -7,6 +7,7 @@ import loader from "@lib/loaders/loaders";
 import { enableFileDropEventListener } from "@/renderer/lib/file/drop-file";
 import { initFileLoader } from "@/renderer/lib/file/init-file";
 import { useGlobalStore } from "@/renderer/store/store";
+import { sendNotification } from "@/renderer/lib/notification";
 
 const Loader: React.FC<{}> = () => {
   const {
@@ -25,13 +26,18 @@ const Loader: React.FC<{}> = () => {
     console.log(pendingFileList);
     if (pendingFileList) {
       setAssetLoadingInProgress(true);
-      loader(pendingFileList, scene, (model?: any) => {
-        if (model) {
-          setAssetList([...assetList, model]);
+      loader(
+        pendingFileList,
+        scene,
+        (error: { code: number; message: string }, model?: any) => {
+          if (model) {
+            setAssetList([...assetList, model]);
+          }
+          setPendingFileList(null);
+          setAssetLoadingInProgress(false);
+          sendNotification(error.code, error.message, 5000);
         }
-        setPendingFileList(null);
-        setAssetLoadingInProgress(false);
-      });
+      );
     }
   }, [pendingFileList]);
   return null;
