@@ -12,7 +12,7 @@ const gltfLoader = (
   loader.load(
     filePath,
     (gltf) => {
-      // console.log(gltf);
+      console.log(gltf.scene);
       scene.add(gltf.scene);
       cleanup(
         { code: SUCCESS, message: "File loaded successfully !!" },

@@ -54,7 +54,7 @@ const TransformController = () => {
   }, [ref, ref.current]);
 
   useEffect(() => {
-    // console.log(ref.current, selectedObject);
+    console.log(ref.current, selectedObject);
     if (selectedObject == null) {
       ref.current.detach();
     } else {

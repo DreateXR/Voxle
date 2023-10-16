@@ -7,7 +7,7 @@ type GlobalStore = {
   hoverObject: any;
   selectionHighlight: boolean;
   hoverHighlight: boolean;
-  selectionMode: "object" | "mesh";
+  selectionMode: "object" | "group" | "mesh";
   transformControls: {
     mode: "translate" | "scale" | "rotate";
     space: "world" | "local";
@@ -21,7 +21,7 @@ type GlobalStore = {
   setHoverObject: (hoverObject: any) => void;
   setSelectionHighlight: (selectionHighlight: boolean) => void;
   setHoverHighlight: (hoverHighlight: boolean) => void;
-  setSelectionMode: (selectionMode: "object" | "mesh") => void;
+  setSelectionMode: (selectionMode: "object" | "group" | "mesh") => void;
   setTransformControls: (transformControls: {
     mode: "translate" | "scale" | "rotate";
     space: "world" | "local";

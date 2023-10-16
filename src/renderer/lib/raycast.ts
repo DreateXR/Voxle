@@ -6,6 +6,12 @@ const setIgnoreRaycastFlag = (ref: any) => {
   });
 };
 
+const setUserFlag = (ref: any) => {
+  ref.current.traverse((child: any) => {
+    child.userData.raycast = { tag: "voxle_ignore_raycast" };
+  });
+};
+
 const checkRaycastMesh = (mesh: any) => {
   return (
     !mesh.isTransformControlsPlane &&

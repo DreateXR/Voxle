@@ -11,8 +11,10 @@ import * as THREE from "three";
 
 const HoverController: React.FC<{}> = () => {
   const { scene, camera, raycaster, pointer } = useThree();
-  const { hoverHighlight, setHoverObject, selectionMode } = useGlobalStore();
+  const { hoverHighlight, setHoverObject, selectionMode, assetList } =
+    useGlobalStore();
   const [raycastObjectsList, setRaycastObjectsList] = useState([]);
+  const [isMouseDown, setIsMouseDown] = useState(false);
 
   const raycastObjectHover = () => {
     raycaster.setFromCamera(pointer, camera);
@@ -20,20 +22,32 @@ const HoverController: React.FC<{}> = () => {
 
     if (intersects.length > 0) {
       const intersectedObject = intersects[0].object;
-      let parentGroup = intersectedObject.parent;
+      let parentGroup: any = intersectedObject.parent;
 
-      // Traverse up the hierarchy until we find the topmost group or reach the scene
-      while (parentGroup && parentGroup.type !== "Scene") {
-        if (parentGroup.type === "Group" || parentGroup.type === "Mesh") {
-          //   console.log("Intersected Group:", parentGroup);
-          if (selectionMode == "object") {
-            setHoverObject(parentGroup.parent);
-          } else if (selectionMode == "mesh") {
-            setHoverObject(parentGroup);
+      if (selectionMode == "object") {
+        while (parentGroup && !parentGroup.isScene) {
+          if (parentGroup.isGroup || parentGroup.isMesh) {
+            // console.log("Intersected Group:", parentGroup);
+            if (parentGroup.parent.isScene) {
+              setHoverObject(parentGroup);
+            } else {
+              setHoverObject(parentGroup.parent);
+            }
+            break;
           }
-          break;
+          parentGroup = parentGroup.parent;
         }
-        parentGroup = parentGroup.parent;
+      } else if (selectionMode == "group") {
+        while (parentGroup && !parentGroup.isScene) {
+          if (parentGroup.isGroup || parentGroup.isMesh) {
+            // console.log("Intersected Group:", parentGroup);
+            setHoverObject(parentGroup);
+            break;
+          }
+          parentGroup = parentGroup.parent;
+        }
+      } else if (selectionMode == "mesh") {
+        setHoverObject(intersectedObject);
       }
     } else {
       setHoverObject(null);
@@ -44,24 +58,47 @@ const HoverController: React.FC<{}> = () => {
     setHoverObject(null);
   }, [selectionMode]);
 
-  useFrame(() => {
-    if (hoverHighlight) {
+  const handleMouseDown = () => {
+    setIsMouseDown(true);
+  };
+
+  const handleMouseMove = () => {
+    if (!isMouseDown && hoverHighlight) {
       raycastObjectHover();
     }
-  });
+  };
+
+  const handleMouseUp = () => {
+    setIsMouseDown(false);
+  };
 
   useEffect(() => {
     let meshes: any = [];
-    scene.traverse((child: any) => {
-      if (child.isMesh) {
-        if (checkRaycastMesh(child)) {
+    for (const asset of assetList) {
+      asset.traverse((child: any) => {
+        if (child.isMesh) {
+          // if (checkRaycastMesh(child)) {
           meshes.push(child);
+          // }
         }
-      }
-    });
+      });
+    }
     // console.log(meshes);
     setRaycastObjectsList([...meshes]);
-  }, [scene.children.length]);
+  }, [scene.children.length, assetList]);
+
+  useEffect(() => {
+    const viewport = document.getElementById("viewport");
+    viewport.addEventListener("mousedown", handleMouseDown);
+    viewport.addEventListener("mousemove", handleMouseMove);
+    viewport.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      viewport.removeEventListener("mousedown", handleMouseDown);
+      viewport.removeEventListener("mousemove", handleMouseMove);
+      viewport.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [camera, isMouseDown]);
 
   return null;
 };

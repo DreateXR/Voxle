@@ -13,11 +13,11 @@ const loaderList: {
     scene: any,
     cleanup: (error: { code: number; message: string }, model?: any) => void
   ) => void;
-  fbx: (
-    fileInfo: any,
-    scene: any,
-    cleanup: (error: { code: number; message: string }, model?: any) => void
-  ) => void;
+  // fbx: (
+  //   fileInfo: any,
+  //   scene: any,
+  //   cleanup: (error: { code: number; message: string }, model?: any) => void
+  // ) => void;
   [key: string]:
     | ((
         fileInfo: any,
@@ -28,7 +28,7 @@ const loaderList: {
 } = {
   glb: gltfLoader,
   gltf: gltfLoader,
-  fbx: fbxLoader,
+  // fbx: fbxLoader,
 };
 
 const loader = (

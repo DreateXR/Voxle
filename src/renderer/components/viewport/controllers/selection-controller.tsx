@@ -6,44 +6,50 @@ import * as THREE from "three";
 
 const SelectionController: React.FC<{}> = () => {
   const { scene, camera, raycaster, pointer } = useThree();
-  const { setSelectedObject, selectionMode } = useGlobalStore();
+  const { setSelectedObject, selectionMode, assetList } = useGlobalStore();
   const [raycastObjectsList, setRaycastObjectsList] = useState([]);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [isMouseMove, setIsMouseMove] = useState(false);
 
   const raycastObjectSelection = () => {
-    // console.log("selection mouse down", isMouseDown, isMouseMove);
     if (isMouseMove) {
-      // console.log("returned");
       return;
     }
 
     raycaster.setFromCamera(pointer, camera);
-
-    let intersects = raycaster.intersectObjects(raycastObjectsList);
-    // console.log(intersects);
-    // intersects = filterRaycastArray(intersects);
+    const intersects = raycaster.intersectObjects(raycastObjectsList);
     console.log("final raycast", intersects);
 
     if (intersects.length > 0) {
       const intersectedObject = intersects[0].object;
-      let parentGroup = intersectedObject.parent;
+      let parentGroup: any = intersectedObject.parent;
 
-      // Traverse up the hierarchy until we find the topmost group or reach the scene
-      while (parentGroup && parentGroup.type !== "Scene") {
-        if (parentGroup.type === "Group" || parentGroup.type === "Mesh") {
-          console.log("Intersected Group:", parentGroup);
-          if (selectionMode == "object") {
-            setSelectedObject(parentGroup.parent);
-          } else if (selectionMode == "mesh") {
-            setSelectedObject(parentGroup);
+      if (selectionMode == "object") {
+        while (parentGroup && !parentGroup.isScene) {
+          if (parentGroup.isGroup || parentGroup.isMesh) {
+            console.log("Intersected Group:", parentGroup);
+            if (parentGroup.parent.isScene) {
+              setSelectedObject(parentGroup);
+            } else {
+              setSelectedObject(parentGroup.parent);
+            }
+            break;
           }
-          break;
+          parentGroup = parentGroup.parent;
         }
-        parentGroup = parentGroup.parent;
+      } else if (selectionMode == "group") {
+        while (parentGroup && !parentGroup.isScene) {
+          if (parentGroup.isGroup || parentGroup.isMesh) {
+            // console.log("Intersected Group:", parentGroup);
+            setSelectedObject(parentGroup);
+            break;
+          }
+          parentGroup = parentGroup.parent;
+        }
+      } else if (selectionMode == "mesh") {
+        setSelectedObject(intersectedObject);
       }
     } else {
-      // console.log("clicked");
       setSelectedObject(null);
     }
   };
@@ -73,16 +79,25 @@ const SelectionController: React.FC<{}> = () => {
 
   useEffect(() => {
     let meshes: any = [];
-    scene.traverse((child: any) => {
-      if (child.isMesh) {
-        if (checkRaycastMesh(child)) {
+    // scene.traverse((child: any) => {
+    //   if (child.isMesh || child.isGroup) {
+    //     if (checkRaycastMesh(child)) {
+    //       meshes.push(child);
+    //     }
+    //   }
+    // });
+    for (const asset of assetList) {
+      asset.traverse((child: any) => {
+        if (child.isMesh) {
+          // if (checkRaycastMesh(child)) {
           meshes.push(child);
+          // }
         }
-      }
-    });
-    // console.log(meshes);
+      });
+    }
+    console.log(meshes);
     setRaycastObjectsList([...meshes]);
-  }, [scene.children.length]);
+  }, [scene.children.length, assetList]);
 
   useEffect(() => {
     const viewport = document.getElementById("viewport");

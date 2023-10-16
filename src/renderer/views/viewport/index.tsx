@@ -22,6 +22,7 @@ import {
 import { Outline } from "@react-three/postprocessing";
 import EditorPanel from "@/renderer/components/panels/editor-panel";
 import PostProcessing from "@/renderer/components/viewport/post-processing";
+import Insights from "@/renderer/components/viewport/insights";
 
 const Viewport: React.FC<{ className: string }> = ({ className }) => {
   return (
@@ -42,6 +43,7 @@ const Viewport: React.FC<{ className: string }> = ({ className }) => {
           <Gizmo />
           <Axis />
           <PostProcessing />
+          <Insights />
         </Canvas>
       </div>
     </main>

@@ -14,10 +14,13 @@ const SelectionMode: React.FC<{}> = () => {
         }}
       >
         <option className="bg-app-border-color" value="object">
-          Object Mode
+          Object Selection
+        </option>
+        <option className="bg-app-border-color" value="group">
+          Group Selection
         </option>
         <option className="bg-app-border-color" value="mesh">
-          Mesh Mode
+          Mesh Selection
         </option>
       </select>
     </div>
