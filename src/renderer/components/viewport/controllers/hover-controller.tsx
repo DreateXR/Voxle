@@ -19,7 +19,7 @@ const HoverController: React.FC<{}> = () => {
   const raycastObjectHover = () => {
     raycaster.setFromCamera(pointer, camera);
     let intersects = raycaster.intersectObjects(raycastObjectsList);
-
+    // console.log(intersects, raycastObjectsList);
     if (intersects.length > 0) {
       const intersectedObject = intersects[0].object;
       let parentGroup: any = intersectedObject.parent;
@@ -58,12 +58,18 @@ const HoverController: React.FC<{}> = () => {
     setHoverObject(null);
   }, [selectionMode]);
 
+  useEffect(() => {
+    setIsMouseDown(false);
+  }, []);
+
   const handleMouseDown = () => {
     setIsMouseDown(true);
   };
 
   const handleMouseMove = () => {
+    // console.log("mouse move check", isMouseDown, hoverHighlight);
     if (!isMouseDown && hoverHighlight) {
+      // console.log("mouse moved");
       raycastObjectHover();
     }
   };
@@ -98,7 +104,7 @@ const HoverController: React.FC<{}> = () => {
       viewport.removeEventListener("mousemove", handleMouseMove);
       viewport.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [camera, isMouseDown]);
+  }, [camera, isMouseDown, selectionMode, raycastObjectsList]);
 
   return null;
 };

@@ -52,6 +52,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
+    "react-switch": "^7.0.0",
     "three": "^0.156.1",
     "three-stdlib": "^2.27.0",
     "zustand": "^4.4.1"

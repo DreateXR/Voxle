@@ -3,10 +3,14 @@ import React, { useEffect } from "react";
 import TreeNode from "./tree-node";
 import { useGlobalStore } from "@/renderer/store/store";
 
-const Outliner: React.FC<{}> = () => {
+const Outliner: React.FC<{ tab: string }> = ({ tab }) => {
   const { assetList } = useGlobalStore();
   return (
-    <div className="relative w-full h-full flex flex-col overflow-y-scroll">
+    <div
+      className={`relative w-full overflow-y-scroll ${
+        tab == "Outliner" ? "flex flex-col" : "hidden"
+      }`}
+    >
       <div className="absolute z-0 w-full h-full overflow-hidden">
         {Array.from({ length: 20 }, (x, i) => i + 1).map((index: number) => (
           <div key={index} className="w-full outliner h-7" />

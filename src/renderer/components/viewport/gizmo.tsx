@@ -2,7 +2,12 @@ import { GizmoHelper, GizmoViewcube, GizmoViewport } from "@react-three/drei";
 
 const Gizmo = () => {
   return (
-    <GizmoHelper alignment="bottom-right" margin={[80, 80]} raycast={() => {}}>
+    <GizmoHelper
+      alignment="bottom-right"
+      margin={[80, 80]}
+      raycast={() => {}}
+      renderPriority={2}
+    >
       <GizmoViewport
         labelColor="#fefefe"
         axisHeadScale={1}

@@ -25,12 +25,14 @@
 ::-webkit-scrollbar-track {
   @apply bg-app-scrollbar-track-color;
   @apply rounded-full;
+  @apply w-2;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   @apply bg-app-scrollbar-color;
   @apply rounded-full;
+  @apply w-2;
 }
 
 /* Handle on hover */

@@ -95,7 +95,7 @@ const SelectionController: React.FC<{}> = () => {
         }
       });
     }
-    console.log(meshes);
+    // console.log(meshes);
     setRaycastObjectsList([...meshes]);
   }, [scene.children.length, assetList]);
 
@@ -110,7 +110,7 @@ const SelectionController: React.FC<{}> = () => {
       viewport.removeEventListener("mousemove", handleMouseMove);
       viewport.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [camera, isMouseDown, isMouseMove]);
+  }, [camera, isMouseDown, isMouseMove, raycastObjectsList]);
   return null;
 };
 
