@@ -1,8 +1,9 @@
-import BottomPanel from "@/renderer/components/inspector/outliner/outliner-bottom-panel";
+import BottomPanel from "@/renderer/components/inspector/outliner-view/outliner-bottom-panel";
 import InspectorTab from "@/renderer/components/inspector/inspector-tab";
-import TopPanel from "@/renderer/components/inspector/outliner/outliner-top-panel";
+import TopPanel from "@/renderer/components/inspector/outliner-view/outliner-top-panel";
 import React, { useState } from "react";
-import Outliner from "@/renderer/components/inspector/outliner";
+import OutlinerView from "@/renderer/components/inspector/outliner-view";
+import InsightsView from "@/renderer/components/inspector/insights-view";
 
 const Inspector: React.FC<{ className: string }> = ({ className }) => {
   const [selectedTab, setSelectedTab] = useState("Outliner");
@@ -21,7 +22,8 @@ const Inspector: React.FC<{ className: string }> = ({ className }) => {
         />
       </div>
       <div className="w-full grow flex">
-        <Outliner selectedTab={selectedTab} />
+        <OutlinerView selectedTab={selectedTab} title="Outliner" />
+        <InsightsView selectedTab={selectedTab} title="Insights" />
       </div>
     </div>
   );

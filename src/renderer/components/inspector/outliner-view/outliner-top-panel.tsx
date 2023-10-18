@@ -14,7 +14,14 @@ const OutlinerTopPanel = () => {
       </div>
       <div className="absolute w-full h-full z-20 overflow-y-scroll">
         {assetList.map((child: any, index: number) => (
-          <TreeNode key={index} node={child} depth={1} length={1} index={1} />
+          <TreeNode
+            key={index}
+            node={child}
+            depth={1}
+            length={1}
+            index={1}
+            selected={false}
+          />
         ))}
       </div>
       {/* </div> */}

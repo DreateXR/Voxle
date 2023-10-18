@@ -5,11 +5,14 @@ import { useGlobalStore } from "@/renderer/store/store";
 import OutlinerTopPanel from "./outliner-top-panel";
 import OutlinerBottomPanel from "./outliner-bottom-panel";
 
-const Outliner: React.FC<{ selectedTab: string }> = ({ selectedTab }) => {
+const OutlinerView: React.FC<{ selectedTab: string; title: string }> = ({
+  selectedTab,
+  title,
+}) => {
   return (
     <div
       className={`w-full h-full ${
-        selectedTab == "Outliner" ? "flex flex-col gap-1" : "hidden"
+        selectedTab == title ? "flex flex-col gap-1" : "hidden"
       }`}
     >
       <OutlinerTopPanel />
@@ -18,4 +21,4 @@ const Outliner: React.FC<{ selectedTab: string }> = ({ selectedTab }) => {
   );
 };
 
-export default Outliner;
+export default OutlinerView;

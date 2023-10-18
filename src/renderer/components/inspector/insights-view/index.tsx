@@ -1,16 +1,24 @@
 import { useGlobalStore } from "@/renderer/store/store";
-import React, { useState } from "react";
 import Switch from "react-switch";
+import React from "react";
 
-const OutlinerBottomPanel = () => {
+const InsightsView: React.FC<{ selectedTab: string; title: string }> = ({
+  selectedTab,
+  title,
+}) => {
   const {
     insights,
     selectedObject,
     enableSelectedObjectInsights,
     setEnableSelectedObjectInsights,
   } = useGlobalStore();
+
   return (
-    <div className="w-full max-h-1/2 h-1/2 flex flex-col p-6 rounded  bg-top-panel-tab-enabled text-app-white ">
+    <div
+      className={`w-full h-full bg-top-panel-tab-enabled rounded p-6 ${
+        selectedTab == title ? "flex flex-col gap-1" : "hidden"
+      }`}
+    >
       <div className="flex flex-col gap-4 font-mono">
         <div className="flex flex-col gap-1">
           <Switch
@@ -63,4 +71,4 @@ const OutlinerBottomPanel = () => {
   );
 };
 
-export default OutlinerBottomPanel;
+export default InsightsView;
