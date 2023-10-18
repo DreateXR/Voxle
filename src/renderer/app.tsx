@@ -12,7 +12,7 @@ const App: React.FC<{}> = () => {
       <LoadingAnimation />
       <div className="w-full h-full flex gap-1">
         <Viewport className=" relative grow h-full" />
-        <Inspector className="w-[350px] h-full rounded flex flex-col gap-1" />
+        <Inspector className="w-[350px] h-full flex flex-col pt-2" />
       </div>
       <Toaster position="bottom-right" reverseOrder={false} />
     </div>

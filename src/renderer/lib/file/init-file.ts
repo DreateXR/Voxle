@@ -9,6 +9,7 @@ const initFileLoader = async () => {
       name: initFilePath.replace(/^.*[\\\/]/, ""),
       path: initFilePath,
     };
+    if (fileInfo.name == ".") return;
     useGlobalStore.setState({ pendingFileList: fileInfo });
     // loader(fileInfo, scene);
   } catch {

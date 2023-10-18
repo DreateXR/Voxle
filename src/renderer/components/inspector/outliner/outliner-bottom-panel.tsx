@@ -2,7 +2,7 @@ import { useGlobalStore } from "@/renderer/store/store";
 import React, { useState } from "react";
 import Switch from "react-switch";
 
-const BottomPanel = () => {
+const OutlinerBottomPanel = () => {
   const {
     insights,
     selectedObject,
@@ -10,7 +10,7 @@ const BottomPanel = () => {
     setEnableSelectedObjectInsights,
   } = useGlobalStore();
   return (
-    <div className="w-full h-1/2 flex flex-col p-6 rounded  bg-top-panel-tab-enabled text-app-white ">
+    <div className="w-full max-h-1/2 h-1/2 flex flex-col p-6 rounded  bg-top-panel-tab-enabled text-app-white ">
       <div className="flex flex-col gap-4 font-mono">
         <div className="flex flex-col gap-1">
           <Switch
@@ -63,4 +63,4 @@ const BottomPanel = () => {
   );
 };
 
-export default BottomPanel;
+export default OutlinerBottomPanel;

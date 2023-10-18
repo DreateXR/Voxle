@@ -18,9 +18,6 @@ const TreeNode: React.FC<{
   if ((!node.isMesh && !node.isGroup && !node.isObject3D) || node.isBone) {
     return null;
   }
-  useEffect(() => {
-    // console.log(node);
-  }, [node]);
   return (
     <>
       <div
