@@ -39,7 +39,7 @@ const ObjectScale = () => {
   return (
     <div className="w-full flex flex-col font-mono text-sm gap-1">
       <div className="w-full flex gap-2">
-        <div className="w-1/2 flex justify-end">Scale X</div>
+        <div className="w-1/3 flex justify-end">Scale X</div>
         <div>:</div>
         <input
           className="w-1/3 rounded border-app-white-disable border-[0.5px] bg-top-panel-tab-disabled pl-1"
@@ -48,7 +48,7 @@ const ObjectScale = () => {
             const x = e.target.value;
             if (/^(\d+\.?\d*|\.\d+)?$/.test(x)) {
               if (selectedObject) {
-                selectedObject.scale.x = x;
+                selectedObject.scale.x = Number(x);
               }
               setX(x);
             }
@@ -58,7 +58,7 @@ const ObjectScale = () => {
         />
       </div>
       <div className="w-full flex gap-2">
-        <div className="w-1/2 flex justify-end">Y</div>
+        <div className="w-1/3 flex justify-end">Y</div>
         <div>:</div>
         <input
           className="w-1/3 rounded border-app-white-disable border-[0.5px] bg-top-panel-tab-disabled pl-1"
@@ -67,7 +67,7 @@ const ObjectScale = () => {
             const y = e.target.value;
             if (/^(\d+\.?\d*|\.\d+)?$/.test(y)) {
               if (selectedObject) {
-                selectedObject.scale.y = y;
+                selectedObject.scale.y = Number(y);
               }
               setY(y);
             }
@@ -77,7 +77,7 @@ const ObjectScale = () => {
         />
       </div>
       <div className="w-full flex gap-2">
-        <div className="w-1/2 flex justify-end">Z</div>
+        <div className="w-1/3 flex justify-end">Z</div>
         <div>:</div>
         <input
           className="w-1/3 rounded border-app-white-disable border-[0.5px] bg-top-panel-tab-disabled pl-1"
@@ -86,7 +86,7 @@ const ObjectScale = () => {
             const z = e.target.value;
             if (/^(\d+\.?\d*|\.\d+)?$/.test(z)) {
               if (selectedObject) {
-                selectedObject.scale.z = z;
+                selectedObject.scale.z = Number(z);
               }
               setZ(z);
             }

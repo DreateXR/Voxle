@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TreeNode from "./tree-node";
 import { useGlobalStore } from "@/renderer/store/store";
 
-const OutlinerTopPanel = () => {
+const Outliner = () => {
   const { assetList } = useGlobalStore();
   return (
     <div className="relative w-full h-1/2 overflow-hidden bg-top-panel-tab-enabled rounded">
@@ -29,4 +29,4 @@ const OutlinerTopPanel = () => {
   );
 };
 
-export default OutlinerTopPanel;
+export default Outliner;

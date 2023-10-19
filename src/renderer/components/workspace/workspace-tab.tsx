@@ -1,6 +1,6 @@
 import React from "react";
 
-const InspectorTab: React.FC<{
+const WorkspaceTab: React.FC<{
   title: string;
   selectedTab: string;
   setSelectedTab: (selectedTab: string) => void;
@@ -21,4 +21,4 @@ const InspectorTab: React.FC<{
   );
 };
 
-export default InspectorTab;
+export default WorkspaceTab;

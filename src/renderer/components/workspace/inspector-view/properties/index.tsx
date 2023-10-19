@@ -6,10 +6,9 @@ import ObjectPosition from "./object-position";
 import ObjectRotation from "./object-rotation";
 import ObjectScale from "./object-scale";
 
-const OutlinerBottomPanel = () => {
-  const { selectedObject } = useGlobalStore();
+const Properties = () => {
   return (
-    <div className="w-full max-h-1/2 h-1/2 flex flex-col p-4 rounded  bg-top-panel-tab-enabled text-app-white gap-6 overflow-y-scroll">
+    <div className="grow h-full flex flex-col p-4  bg-top-panel-tab-enabled text-app-white gap-6 overflow-y-scroll">
       <ObjectName />
       <ObjectPosition />
       <ObjectRotation />
@@ -18,4 +17,4 @@ const OutlinerBottomPanel = () => {
   );
 };
 
-export default OutlinerBottomPanel;
+export default Properties;

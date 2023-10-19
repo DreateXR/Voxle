@@ -1,11 +1,11 @@
 import { useThree } from "@react-three/fiber";
 import React, { useEffect } from "react";
-import TreeNode from "./tree-node";
+import TreeNode from "./outliner/tree-node";
 import { useGlobalStore } from "@/renderer/store/store";
-import OutlinerTopPanel from "./outliner-top-panel";
-import OutlinerBottomPanel from "./outliner-bottom-panel";
+import InspectorTopPanel from "./inspector-top-panel";
+import InspectorBottomPanel from "./inspector-bottom-panel";
 
-const OutlinerView: React.FC<{ selectedTab: string; title: string }> = ({
+const InspectorView: React.FC<{ selectedTab: string; title: string }> = ({
   selectedTab,
   title,
 }) => {
@@ -15,10 +15,10 @@ const OutlinerView: React.FC<{ selectedTab: string; title: string }> = ({
         selectedTab == title ? "flex flex-col gap-1" : "hidden"
       }`}
     >
-      <OutlinerTopPanel />
-      <OutlinerBottomPanel />
+      <InspectorTopPanel />
+      <InspectorBottomPanel />
     </div>
   );
 };
 
-export default OutlinerView;
+export default InspectorView;
