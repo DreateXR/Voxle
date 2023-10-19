@@ -1,5 +1,6 @@
 import { useGlobalStore } from "@/renderer/store/store";
 import { APP_COLOR_SCHEME } from "@config/color-scheme";
+import VOXLE_TOOLTIP from "@config/tooltip";
 import React from "react";
 
 const TranslateMode = () => {
@@ -7,6 +8,8 @@ const TranslateMode = () => {
   return (
     <div
       className="relative h-8 aspect-square bg-app-primary-color rounded p-1.5 cursor-pointer bg-opacity-75 hover:bg-opacity-100 hover:bg-app-hover-color"
+      data-tooltip-id={VOXLE_TOOLTIP.id}
+      data-tooltip-content={VOXLE_TOOLTIP["select-transform-translate-mode"]}
       onClick={() => {
         if (transformControls.mode == "translate") return;
         setTransformControls({

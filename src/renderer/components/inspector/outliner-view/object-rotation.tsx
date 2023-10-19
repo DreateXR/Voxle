@@ -25,9 +25,21 @@ const ObjectRotation = () => {
         setY("0");
         setZ("0");
       } else {
-        setX(selectedObject.rotation.x.toFixed(3));
-        setY(selectedObject.rotation.y.toFixed(3));
-        setZ(selectedObject.rotation.z.toFixed(3));
+        setX(
+          `${((180 * parseFloat(selectedObject.rotation.x)) / Math.PI).toFixed(
+            2
+          )}`
+        );
+        setY(
+          `${((180 * parseFloat(selectedObject.rotation.y)) / Math.PI).toFixed(
+            2
+          )}`
+        );
+        setZ(
+          `${((180 * parseFloat(selectedObject.rotation.z)) / Math.PI).toFixed(
+            2
+          )}`
+        );
       }
     }
   }, [
@@ -48,7 +60,7 @@ const ObjectRotation = () => {
             const x = e.target.value;
             if (/^(\d+\.?\d*|\.\d+)?$/.test(x)) {
               if (selectedObject) {
-                selectedObject.rotation.x = x;
+                selectedObject.rotation.x = (Math.PI * parseFloat(x)) / 180;
               }
               setX(x);
             }
@@ -68,7 +80,7 @@ const ObjectRotation = () => {
             const y = e.target.value;
             if (/^(\d+\.?\d*|\.\d+)?$/.test(y)) {
               if (selectedObject) {
-                selectedObject.rotation.y = y;
+                selectedObject.rotation.y = (Math.PI * parseFloat(y)) / 180;
               }
               setY(y);
             }
@@ -88,7 +100,7 @@ const ObjectRotation = () => {
             const z = e.target.value;
             if (/^(\d+\.?\d*|\.\d+)?$/.test(z)) {
               if (selectedObject) {
-                selectedObject.rotation.z = z;
+                selectedObject.rotation.z = (Math.PI * parseFloat(z)) / 180;
               }
               setZ(z);
             }

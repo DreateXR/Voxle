@@ -1,12 +1,15 @@
 import React, { useRef } from "react";
 import { APP_COLOR_SCHEME } from "@config/color-scheme";
 import { fileUploader } from "@/renderer/lib/file/upload-file";
+import VOXLE_TOOLTIP from "@config/tooltip";
 
 const Upload: React.FC<{}> = () => {
   const fileInputRef = useRef(null);
   return (
     <div
       className="relative h-8 aspect-square bg-app-primary-color rounded p-1.5 cursor-pointer bg-opacity-75 hover:bg-opacity-100 hover:bg-app-hover-color"
+      data-tooltip-id={VOXLE_TOOLTIP.id}
+      data-tooltip-content={VOXLE_TOOLTIP["file-upload"]}
       onClick={() => {
         fileInputRef.current.click();
       }}

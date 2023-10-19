@@ -7,6 +7,7 @@ const APP_COLOR_SCHEME = {
   "app-scrollbar-color": "#606060",
   "app-scrollbar-hover-color": "#666666",
   "app-white": "#dddddd",
+  "app-white-full": "#eeeeee",
   "app-white-in-focus": "#dddddd",
   "app-white-out-of-focus": "#aaaaaa",
   "app-white-disable": "#808080",
