@@ -12,7 +12,7 @@ type Insights = {
   "texture-count": number;
 };
 
-type GlobalStore = {
+type Store = {
   assetLoadingInProgress: boolean;
   pendingFileList: any;
   selectedObject: any;
@@ -26,9 +26,15 @@ type GlobalStore = {
   assetList: any;
   enableSelectedObjectInsights: boolean;
   insights: Insights;
-
-  // Setter methods will be created dynamically
 };
+
+type Setters = {
+  [K in keyof Store as `set${Capitalize<string & K>}`]: (
+    value: Store[K]
+  ) => void;
+};
+
+type GlobalStore = Store & Setters;
 
 const createSetter = (key: keyof GlobalStore) => (value: any) => ({
   [key]: value,

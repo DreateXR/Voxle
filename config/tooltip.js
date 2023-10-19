@@ -9,6 +9,9 @@ const VOXLE_TOOLTIP = {
   "select-transform-scale-mode": "Enable Mesh Scale Gizmo",
   "toggle-transform-space-mode": "Toggle Transform Space",
   "file-upload": "Upload File",
+  "properties-tab": "Open Properties Panel",
+  "modifiers-tab": "Open Modifiers Panel",
+  "export-jsx-tab": "Open Export to JSX Panel",
 };
 
 export default VOXLE_TOOLTIP;

@@ -6,9 +6,16 @@ import ObjectPosition from "./object-position";
 import ObjectRotation from "./object-rotation";
 import ObjectScale from "./object-scale";
 
-const Properties = () => {
+const Properties: React.FC<{ selectedTab: string; title: string }> = ({
+  selectedTab,
+  title,
+}) => {
   return (
-    <div className="grow h-full flex flex-col p-4  bg-top-panel-tab-enabled text-app-white gap-6 overflow-y-scroll">
+    <div
+      className={`w-full h-full ${
+        selectedTab == title ? "flex flex-col" : "hidden"
+      }  p-4  bg-top-panel-tab-enabled text-app-white gap-6 overflow-y-scroll`}
+    >
       <ObjectName />
       <ObjectPosition />
       <ObjectRotation />
