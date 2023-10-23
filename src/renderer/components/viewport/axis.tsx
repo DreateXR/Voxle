@@ -8,7 +8,7 @@ import * as THREE from "three";
 
 const Axis: React.FC<{}> = () => {
   const { axisVisibility } = useGlobalStore();
-  const { camera } = useThree();
+  const { camera, scene } = useThree();
   const ref = useRef<THREE.Mesh>();
   const xRef = useRef<THREE.ArrowHelper>();
   const yRef = useRef<THREE.ArrowHelper>();
@@ -39,7 +39,7 @@ const Axis: React.FC<{}> = () => {
   });
 
   useEffect(() => {
-    console.log(ref.current.children);
+    console.log(ref.current.children, scene);
     ref.current.traverse((child: any) => {
       if (child.material) {
         child.renderOrder = 999;

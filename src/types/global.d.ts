@@ -6,6 +6,7 @@ interface Performance {
 interface Window {
   electronAPI: {
     getInitFile: () => Promise<string>; // Replace 'void' with the return type of 'ipcRenderer.send("get-file-data")' if applicable
+    convertToJsx: (config: any) => void;
   };
 }
 

@@ -34,6 +34,26 @@ const getRelativeFilePath = (file: any, root: any) => {
   return relativePath;
 };
 
-const convertToJsx = () => {};
+const convertToJsx = (gltf: any, config: { filepath: string; size: any }) => {
+  console.log(gltf);
+  // cleanup gltf
+  //   if (gltf.isScene) {
+  //     gltf = { scene: gltf.scene, animations: [], parser: { json: {} } };
+  //   } else if (gltf.isObject3D) {
+  //     // Wrap scene in a GLTF Structure
+  //     gltf = { scene: gltf, animations: [], parser: { json: {} } };
+  //   }
+  //   const url = config.filepath;
+  //   const animations = gltf.animations;
+  //   const hasAnimation = animations.length > 0;
 
-export default { toArrayBuffer, roundOff, getRelativeFilePath, convertToJsx };
+  //   const objects = [];
+};
+
+export {
+  toArrayBuffer,
+  roundOff,
+  getRelativeFilePath,
+  getFileSize,
+  convertToJsx,
+};

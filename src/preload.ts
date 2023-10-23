@@ -4,4 +4,6 @@ import { contextBridge, ipcRenderer } from "electron";
 
 contextBridge.exposeInMainWorld("electronAPI", {
   getInitFile: () => ipcRenderer.invoke("init-file-info"),
+  convertToJsx: (config: any) =>
+    ipcRenderer.send("convert-model-to-jsx", config),
 });

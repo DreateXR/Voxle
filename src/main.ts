@@ -1,6 +1,8 @@
 import { app, BrowserWindow, ipcMain, screen } from "electron";
 import path from "path";
 
+import { convertToJsx } from "./main/lib/to-jsx";
+
 // Use high-performance GPU
 app.commandLine.appendSwitch("--force_high_performance_gpu");
 
@@ -61,6 +63,13 @@ const createWindow = () => {
     }
 
     return data;
+  });
+
+  ipcMain.on("convert-model-to-jsx", (event: any, config: any) => {
+    console.log("haha", config);
+
+    convertToJsx(config.model, config);
+    return "hi";
   });
 };
 
