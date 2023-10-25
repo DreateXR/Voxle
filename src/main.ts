@@ -1,7 +1,11 @@
 import { app, BrowserWindow, ipcMain, screen } from "electron";
+import os from "os";
 import path from "path";
 
 import { convertToJsx } from "./main/lib/to-jsx";
+import { createTmpFolder, cleanupTmp } from "./main/lib/utils";
+
+let TMP_FOLDER = "";
 
 // Use high-performance GPU
 app.commandLine.appendSwitch("--force_high_performance_gpu");
@@ -41,6 +45,8 @@ const createWindow = () => {
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 
+  TMP_FOLDER = createTmpFolder();
+
   ipcMain.handle("init-file-info", () => {
     let data = null;
 
@@ -67,7 +73,7 @@ const createWindow = () => {
 
   ipcMain.on("convert-model-to-jsx", (event: any, config: any) => {
     console.log("haha", config);
-
+    console.log(os.tmpdir());
     convertToJsx(config.model, config);
     return "hi";
   });
@@ -85,6 +91,7 @@ app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
   }
+  cleanupTmp(TMP_FOLDER);
 });
 
 app.on("activate", () => {
