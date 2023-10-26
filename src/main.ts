@@ -1,9 +1,8 @@
-import { app, BrowserWindow, ipcMain, screen } from "electron";
-import os from "os";
+import { app, BrowserWindow, ipcMain, screen, dialog } from "electron";
 import path from "path";
 
-import { convertToJsx } from "./main/lib/to-jsx";
 import { createTmpFolder, cleanupTmp } from "./main/lib/utils";
+import initializeIPC from "./main/ipc-main";
 
 let TMP_FOLDER = "";
 
@@ -47,36 +46,7 @@ const createWindow = () => {
 
   TMP_FOLDER = createTmpFolder();
 
-  ipcMain.handle("init-file-info", () => {
-    let data = null;
-
-    // For Windows
-    if (process.platform == "win32" && process.argv.length >= 2) {
-      let openFilePath = process.argv[1];
-      data = openFilePath;
-    }
-
-    // For macOS and Linux
-    else if (
-      (process.platform === "darwin" || process.platform === "linux") &&
-      process.argv.length >= 2
-    ) {
-      let openFilePath = process.argv[1];
-      // Check if the file path is not an Electron flag (e.g., --no-sandbox)
-      if (!openFilePath.startsWith("--")) {
-        data = openFilePath;
-      }
-    }
-
-    return data;
-  });
-
-  ipcMain.on("convert-model-to-jsx", (event: any, config: any) => {
-    console.log("haha", config);
-    console.log(os.tmpdir());
-    convertToJsx(config.model, config);
-    return "hi";
-  });
+  initializeIPC();
 };
 
 // This method will be called when Electron has finished

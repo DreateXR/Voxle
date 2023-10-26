@@ -7,7 +7,9 @@ interface Window {
   electronAPI: {
     getInitFile: () => Promise<string>; // Replace 'void' with the return type of 'ipcRenderer.send("get-file-data")' if applicable
     convertToJsx: (config: any) => void;
+    selectFolder: () => Promise<any>;
   };
+  showDirectoryPicker?: () => Promise<FileSystemDirectoryHandle>;
 }
 
 declare const MAIN_WINDOW_VITE_DEV_SERVER_URL: string;
