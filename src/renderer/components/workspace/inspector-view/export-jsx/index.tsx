@@ -1,7 +1,8 @@
 import { useGlobalStore } from "@/renderer/store/store";
-import { useThree } from "@react-three/fiber";
 import React, { useState } from "react";
 import ExportFilePath from "./export-file-path";
+import ToggleExportMenu from "./toggle-export-menu";
+import DropDown from "./drop-down";
 
 const ExportToJsx: React.FC<{ selectedTab: string; title: string }> = ({
   selectedTab,
@@ -10,17 +11,84 @@ const ExportToJsx: React.FC<{ selectedTab: string; title: string }> = ({
   //   const { scene } = useThree();
   const { assetList } = useGlobalStore();
   const [outputPath, setOutputPath] = useState("");
+  const [fileName, setFileName] = useState("model.jsx");
+  const [enableTypescript, setEnableTypescript] = useState(false);
+  const [keepOriginal, setKeepOriginal] = useState(false);
+  const [keepGroups, setKeepGroups] = useState(false);
+  const [meta, setMeta] = useState(false);
+  const [enableShadows, setEnableShadows] = useState(false);
+  const [enableInstances, setEnableInstances] = useState(false);
+  const [enableInstanceAll, setEnableInstanceAll] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(false);
   return (
     <div
-      className={`w-full h-full ${
-        selectedTab == title ? "flex flex-col" : "hidden"
+      className={`w-full h-full font-mono ${
+        selectedTab == title ? "flex flex-col gap-4" : "hidden"
       }  p-4  bg-top-panel-tab-enabled text-app-white gap-6 overflow-y-scroll`}
     >
-      <div className="font-mono w-full border-b-[1px] border-b-app-scrollbar-color py-1">
+      <div className="w-full border-b-[1px] border-b-app-scrollbar-color py-1">
         Export to JSX
       </div>
-      <ExportFilePath outputPath={outputPath} setOutputPath={setOutputPath} />
-      <div
+      <ExportFilePath
+        fileName={fileName}
+        setFileName={setFileName}
+        outputPath={outputPath}
+        setOutputPath={setOutputPath}
+      />
+      <div className="w-full flex flex-col gap-2">
+        <ToggleExportMenu
+          checked={enableTypescript}
+          onChange={setEnableTypescript}
+          label="Enable Typescript"
+        />
+        <ToggleExportMenu
+          checked={keepOriginal}
+          onChange={setKeepOriginal}
+          label="Keep Original Names"
+        />
+        <ToggleExportMenu
+          checked={keepGroups}
+          onChange={setKeepGroups}
+          label="Keep Empty Groups, disable pruning"
+        />
+        <ToggleExportMenu
+          checked={meta}
+          onChange={setMeta}
+          label="Include Metadata"
+        />
+        <ToggleExportMenu
+          checked={enableShadows}
+          onChange={setEnableShadows}
+          label="Enable Shadows"
+        />
+        <ToggleExportMenu
+          checked={enableInstances}
+          onChange={setEnableInstances}
+          label="Instance duplicate geometry"
+        />
+        <ToggleExportMenu
+          checked={enableInstanceAll}
+          onChange={setEnableInstanceAll}
+          label="Instance all geometry"
+        />
+      </div>
+      <div className="w-full flex flex-col border-[1px] border-app-white-disable rounded-lg">
+        <div className="w-full flex p-2 justify-start items-center gap-6">
+          <div className="relative h-6 aspect-square">
+            <DropDown
+              isExpanded={showAdvanced}
+              setIsExpanded={setShowAdvanced}
+            />
+          </div>
+          Advanced Settings
+        </div>
+        {showAdvanced && (
+          <div className="w-full p-2 bg-top-panel-tab-disabled rounded-b-lg">
+            hui
+          </div>
+        )}
+      </div>
+      {/* <div
         className="px-6 py-2 flex justify-center items-center cursor-pointer bg-app-white-disable hover:bg-app-white text-app-primary-color"
         onClick={() => {
           const x = window.electronAPI.convertToJsx({
@@ -30,7 +98,7 @@ const ExportToJsx: React.FC<{ selectedTab: string; title: string }> = ({
         }}
       >
         Test Button
-      </div>
+      </div> */}
     </div>
   );
 };
