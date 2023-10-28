@@ -30,7 +30,7 @@ const InspectorBottomPanel = () => {
           setSelectedTab={setTab}
         />
       </div>
-      <div className="shrink grow basis-0 h-full bg-top-panel-tab-enabled">
+      <div className="relative shrink grow basis-0 h-full bg-top-panel-tab-enabled overflow-hidden">
         <Properties selectedTab={tab} title="properties-tab" />
         <ExportToJsx selectedTab={tab} title="export-jsx-tab" />
       </div>

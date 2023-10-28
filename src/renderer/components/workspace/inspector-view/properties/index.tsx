@@ -12,7 +12,7 @@ const Properties: React.FC<{ selectedTab: string; title: string }> = ({
 }) => {
   return (
     <div
-      className={`w-full h-full ${
+      className={`absolute w-full h-full ${
         selectedTab == title ? "flex flex-col" : "hidden"
       }  p-4  bg-top-panel-tab-enabled text-app-white gap-6 overflow-y-scroll`}
     >
