@@ -125,7 +125,7 @@ const ExportToJsx: React.FC<{ selectedTab: string; title: string }> = ({
       </div> */}
       <div className="flex justify-center items-center ">
         <div
-          className="cursor-pointer bg-app-white-disable hover:bg-app-white text-app-primary-color"
+          className="px-8 py-1 rounded cursor-pointer bg-app-white-disable hover:bg-app-white text-app-primary-color"
           onClick={() => {
             // const x = window.electronAPI.convertToJsx({
             //   model: "Test",

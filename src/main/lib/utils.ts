@@ -1,24 +1,32 @@
 import os from "os";
 import fs from "fs";
+import path from "path";
+
+import { getStore, setStore, deleteStore } from "../store/store";
 
 const createTmpFolder = () => {
-  const tmpDirectory = os.tmpdir() + "/voxle";
-  console.log(tmpDirectory);
+  const tmpDirectory = path.join(os.tmpdir(), "voxle");
+
+  console.log(tmpDirectory, os.homedir());
+  setStore("temp-folder", tmpDirectory);
   if (fs.existsSync(tmpDirectory)) {
     return;
   }
   try {
     fs.mkdirSync(tmpDirectory);
-    return tmpDirectory;
   } catch (e) {
     console.log(e);
-    return;
   }
 };
 
-const cleanupTmp = (tmpDirectory: any) => {
+const cleanupTmp = () => {
+  const tmpDirectory: any = getStore("temp-folder");
+  console.log(tmpDirectory);
   try {
-    fs.rmdirSync(tmpDirectory);
+    if (tmpDirectory) {
+      deleteStore("temp-folder");
+      fs.rmdirSync(tmpDirectory);
+    }
   } catch (e) {
     console.log(e);
   }

@@ -1,6 +1,7 @@
 import { ipcMain, dialog } from "electron";
 import os from "os";
 import { convertToJsx } from "./lib/to-jsx";
+import { getStore } from "./store/store";
 
 const initializeIPC = () => {
   ipcMain.handle("init-file-info", () => {
@@ -43,6 +44,16 @@ const initializeIPC = () => {
       return result[0];
     }
     return "";
+  });
+
+  ipcMain.handle("get-app-configuration", (event: any, key: string) => {
+    console.log(key);
+    const value = getStore(key);
+    console.log(value);
+    if (value) {
+      return value;
+    }
+    return null;
   });
 };
 

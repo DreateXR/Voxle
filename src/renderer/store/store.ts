@@ -24,6 +24,8 @@ type Store = {
   gridVisibility: boolean;
   axisVisibility: boolean;
   assetList: any;
+  scene: any;
+  tempFolder: string | null;
   enableSelectedObjectInsights: boolean;
   insights: Insights;
 };
@@ -53,6 +55,8 @@ export const useGlobalStore = create<GlobalStore>((set) => {
     transformControls: { mode: "translate", space: "world" },
     axisVisibility: true,
     assetList: [],
+    scene: null,
+    tempFolder: null,
     enableSelectedObjectInsights: false,
     insights: {
       "vertex-count": 0,
@@ -79,6 +83,8 @@ export const useGlobalStore = create<GlobalStore>((set) => {
     transformControls: { mode: "translate", space: "world" },
     axisVisibility: true,
     assetList: [],
+    scene: null,
+    tempFolder: null,
     enableSelectedObjectInsights: false,
     insights: {
       "vertex-count": 0,

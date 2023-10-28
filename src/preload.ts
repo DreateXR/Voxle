@@ -7,4 +7,6 @@ contextBridge.exposeInMainWorld("electronAPI", {
   convertToJsx: (config: any) =>
     ipcRenderer.send("convert-model-to-jsx", config),
   selectFolder: () => ipcRenderer.invoke("open-folder-dialog"),
+  getAppConfiguration: (key: string) =>
+    ipcRenderer.invoke("get-app-configuration", key),
 });

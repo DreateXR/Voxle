@@ -16,6 +16,7 @@ const Loader: React.FC<{}> = () => {
     setPendingFileList,
     assetList,
     setAssetList,
+    setScene,
   } = useGlobalStore();
   const { scene } = useThree();
   useEffect(() => {
@@ -32,6 +33,7 @@ const Loader: React.FC<{}> = () => {
         (error: { code: number; message: string }, model?: any) => {
           if (model) {
             setAssetList([...assetList, model]);
+            setScene(scene);
           }
           setPendingFileList(null);
           setAssetLoadingInProgress(false);

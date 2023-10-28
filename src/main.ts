@@ -4,8 +4,6 @@ import path from "path";
 import { createTmpFolder, cleanupTmp } from "./main/lib/utils";
 import initializeIPC from "./main/ipc-main";
 
-let TMP_FOLDER = "";
-
 // Use high-performance GPU
 app.commandLine.appendSwitch("--force_high_performance_gpu");
 
@@ -43,9 +41,7 @@ const createWindow = () => {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
-
-  TMP_FOLDER = createTmpFolder();
-
+  createTmpFolder();
   initializeIPC();
 };
 
@@ -61,7 +57,7 @@ app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
   }
-  cleanupTmp(TMP_FOLDER);
+  cleanupTmp();
 });
 
 app.on("activate", () => {

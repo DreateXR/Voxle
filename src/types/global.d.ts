@@ -8,6 +8,7 @@ interface Window {
     getInitFile: () => Promise<string>; // Replace 'void' with the return type of 'ipcRenderer.send("get-file-data")' if applicable
     convertToJsx: (config: any) => void;
     selectFolder: () => Promise<any>;
+    getAppConfiguration: (key: string) => Promise<any>;
   };
   showDirectoryPicker?: () => Promise<FileSystemDirectoryHandle>;
 }

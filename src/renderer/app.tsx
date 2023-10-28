@@ -8,8 +8,17 @@ import { Toaster } from "react-hot-toast";
 import { Tooltip } from "react-tooltip";
 import VOXLE_TOOLTIP from "@config/tooltip";
 import { APP_COLOR_SCHEME } from "@config/color-scheme";
+import { useGlobalStore } from "./store/store";
 
 const App: React.FC<{}> = () => {
+  const { setTempFolder } = useGlobalStore();
+  useEffect(() => {
+    (async () => {
+      setTempFolder(
+        await window.electronAPI.getAppConfiguration("temp-folder")
+      );
+    })();
+  }, []);
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-app-border-color text-app-white p-1 rounded">
       <LoadingAnimation />
