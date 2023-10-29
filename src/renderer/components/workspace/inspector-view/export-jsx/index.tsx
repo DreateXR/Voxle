@@ -4,13 +4,14 @@ import ExportFilePath from "./export-file-path";
 import ToggleExportMenu from "./toggle-export-menu";
 import DropDown from "./drop-down";
 import AssetOptimisation from "./asset-optimisation";
+import { writeToTemp } from "@/renderer/lib/gltf-transform-utils";
 
 const ExportToJsx: React.FC<{ selectedTab: string; title: string }> = ({
   selectedTab,
   title,
 }) => {
   //   const { scene } = useThree();
-  const { assetList } = useGlobalStore();
+  const { assetList, tempFolder, scene } = useGlobalStore();
   const [outputPath, setOutputPath] = useState("");
   const [fileName, setFileName] = useState("model");
   const [enableTypescript, setEnableTypescript] = useState(false);
@@ -127,6 +128,10 @@ const ExportToJsx: React.FC<{ selectedTab: string; title: string }> = ({
         <div
           className="px-8 py-1 rounded cursor-pointer bg-app-white-disable hover:bg-app-white text-app-primary-color"
           onClick={() => {
+            // if (assetList.length > 0) {
+            writeToTemp(assetList, tempFolder, "model.glb");
+            // }
+
             // const x = window.electronAPI.convertToJsx({
             //   model: "Test",
             //   filename: "hihi",

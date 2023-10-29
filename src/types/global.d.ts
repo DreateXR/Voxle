@@ -9,6 +9,8 @@ interface Window {
     convertToJsx: (config: any) => void;
     selectFolder: () => Promise<any>;
     getAppConfiguration: (key: string) => Promise<any>;
+    joinPath: (a: string, b: string) => string;
+    fsWriteSync: (path: string, data: any) => any;
   };
   showDirectoryPicker?: () => Promise<FileSystemDirectoryHandle>;
 }
