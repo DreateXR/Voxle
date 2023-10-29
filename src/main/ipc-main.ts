@@ -1,6 +1,6 @@
 import { ipcMain, dialog } from "electron";
 import os from "os";
-import { convertToJsx } from "./lib/to-jsx";
+import { convertToJsx } from "./lib/export-to-jsx";
 import { getStore } from "./store/store";
 
 const initializeIPC = () => {
