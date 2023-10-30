@@ -129,16 +129,33 @@ const ExportToJsx: React.FC<{ selectedTab: string; title: string }> = ({
           className="px-8 py-1 rounded cursor-pointer bg-app-white-disable hover:bg-app-white text-app-primary-color"
           onClick={async () => {
             // if (assetList.length > 0) {
-            await writeToTemp(assetList, tempFolder, "model.glb");
-            await window.electronAPI.convertToJsx({
-              "output-path": outputPath,
+            const inputFilePath = await writeToTemp(
+              assetList,
+              tempFolder,
+              "model.glb"
+            );
+            const ret = await window.electronAPI.convertToJsx({
+              "-input-file": inputFilePath,
+              "-output-path": outputPath,
+              "-file-name": fileName,
+              "-enable-typescript": enableTypescript,
+              "-keep-original": keepOriginal,
+              "-keep-groups": keepGroups,
+              "-meta": meta,
+              "-enable-shadows": enableShadows,
+              "-enable-instances": enableInstances,
+              "-enable-instance-all": enableInstanceAll,
+              "-mesh-transform": meshTransformation,
+              "-resolution": resolution,
+              "-keep-meshes": keepMeshes,
+              "-keep-materials": keepMaterials,
+              "-format": format,
+              "-simplify": simplify,
+              "-weld": weld,
+              "-ratio": ratio,
+              "-error": error,
             });
-            // }
-
-            // const x = window.electronAPI.convertToJsx({
-            //   model: "Test",
-            //   filename: "hihi",
-            // });
+            console.log(ret);
           }}
         >
           Export

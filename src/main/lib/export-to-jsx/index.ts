@@ -34,8 +34,9 @@ const getRelativeFilePath = (file: any, root: any) => {
   return relativePath;
 };
 
-const convertToJsx = (gltf: any, config: { filepath: string; size: any }) => {
-  console.log(gltf);
+const convertToJsx = (config: any) => {
+  console.log(config);
+  return true;
   // cleanup gltf
   //   if (gltf.isScene) {
   //     gltf = { scene: gltf.scene, animations: [], parser: { json: {} } };

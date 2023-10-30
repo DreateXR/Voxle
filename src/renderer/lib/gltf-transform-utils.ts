@@ -19,9 +19,11 @@ const writeToTemp = async (assetList: any, filePath: string, key: string) => {
       }
       console.log(tempPath, gltf);
       window.electronAPI.fsWriteSync(tempPath, buffer);
+      return tempPath;
     },
     (error) => {
       console.log(error);
+      return null;
     },
     { binary: true }
   );

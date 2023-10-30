@@ -31,7 +31,7 @@ const initializeIPC = () => {
   ipcMain.on("convert-model-to-jsx", (event: any, config: any) => {
     console.log("haha", config);
     console.log(os.tmpdir());
-    convertToJsx(config.model, config);
+    convertToJsx(config);
     return "hi";
   });
 
