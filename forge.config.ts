@@ -13,7 +13,10 @@ const config: ForgeConfig = {
   packagerConfig: {},
   rebuildConfig: {},
   makers: [
-    new MakerSquirrel({}),
+    new MakerSquirrel({
+      name: "voxle-installer.exe",
+      setupExe: "voxle-setup.exe",
+    }),
     new MakerZIP({}, ["darwin"]),
     new MakerRpm({}),
     new MakerDeb({}),
