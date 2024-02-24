@@ -1,5 +1,5 @@
 # Voxle
-Voxle is a 3D utility app designed for real-time viewing and analysis of models and animations. It offers insights into mesh details like vertex and triangle counts, as well as performance metrics including FPS, memory usage, and drawcalls. Perfect for quick and efficient 3D analysis.
+Voxle is an open-source app that transforms 3D models into React JSX components for Web XR applications, it provides utilities such as real-time viewing and analysis of models and animations. It offers insights into mesh details like vertex and triangle counts, as well as performance metrics including FPS, memory usage, and drawcalls. It also supports features like mesh and texture compression, geometry instancing, and Draco file compression for glTF formats.
 
 ## Under development !! 
 
